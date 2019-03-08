@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/highlight_styles/androidstudio.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        
+    <link rel="icon" href="../assets/images/icons/android.png">
+    
+    <title>Laboratorio 1</title>
+</head>
+<body>
+
+    <!-- Eductional basic information -->
+    <p class="subject">
+        Universidad Centroamericana "José Simeón Cañas".<br>
+        Programación de dispositivos móviles.<br>
+        Ciclo 01/19.
+    </p>
+
+    <!-- Front image -->
+    <header id="front-img" style="background-image: url('../assets/images/main/laboratorio1.jpg');">
+       <div class="blackManta">
+            <!-- Float menu implementation -->
+            <div class="float-menu">
+                <div class="menu-content">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav class="menu-side">
+                    <div></div>
+                    <ul>
+                        <li><a href="#introduccion">Introducción</a><i class="fab fa-android"></i></li>
+                        <li><a href="#Project">Creación de proyecto</a><i class="fas fa-star-of-life"></i></li>
+                        <li><a href="#Struct">Estructura del proyecto</a><i class="fas fa-dice-d20"></i></li>
+                        <li><a href="#Short">Atajos de teclado</a><i class="fas fa-tachometer-alt"></i></li>
+                        <li><a href="#GIT">Control de versiones</a><i class="fab fa-github"></i></li>
+                        <li><a href="#Excercise">Ejercicios</a><i class="fas fa-dumbbell"></i></li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- Main content -->
+            <div class="main-front">
+                <h1>Laboratorio 01.</h1>
+                <h3>Uso básico de Android Studio.</h3>
+                <div class="grid-div two-columns frontList">
+                    <!-- Two-columns item -->
+                    <div class="article-body">
+                        <h4>Temario:</h4>
+                        <ol>
+                            <li>
+                                Definición y breve introducción del IDE
+                            </li>
+                            <li>
+                                Creación de un proyecto básico
+                            </li>
+                            <li>
+                                Estructura de carpetas de un proyecto estándar
+                            </li>
+                            <li>
+                                Atajos de teclado y recomendaciones de uso
+                            </li>
+                            <li>
+                                implementación del motor de control de versiones git al IDE
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="article-body">
+                        <h4>Objetivos:</h4>
+                        <ul>
+                            <li>
+                                Que el alumno identifique y entienda los conceptos básicos que maneja el IDE Android Studio
+                            </li>
+                            <li>
+                                Que el alumno pueda crear un proyecto básico de una app Android e identifique la estructura de carpetas del mismo así como cada una de sus partes
+                            </li>
+                            <li>
+                                Que el alumno conozca la importancia de aumentar la eficiencia y productividad a través de las facilidades que provee el IDE
+                            </li>
+                            <li>
+                                Que el alumno logre utilizar el sistema de control de versiones integrado al IDE, y pueda de esta forma gestionar de mejor manera sus proyectos
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>Viernes, 8 de marzo de 2019.</h3>
+                <i class="fas fa-chevron-down" id="down-button"></i>
+            </div>
+       </div>
+    </header>
+
+    <article class="content">
+        <header class="title-content" id="title-content">
+            <div id="brand">
+                <h1>Uso básico de Android Studio</h1>
+            </div>
+            <div id="content-brand">
+                <h5>Adaptacion y productividad</h5>
+            </div>
+        </header>   
+
+        <section id="introduccion">
+            <h2>Introduccion a Android Studio</h2>
+
+            <p>
+                Perteneciente a la amplia variadad de aplicaciones de Google y basado en el software <strong>IntelliJ IDEA</strong> de JetBrains, Android Studio es un <em>Entorno de Desarrollo Integrado</em> (IDE) que proporciona una diversa gama de herramientas y facilidades para el desarrollo de aplicaciones Android destinadas a dispositivos móviles.
+            </p>
+
+            <p>
+                Algunas de las características que más resaltan de este IDE son las siguientes (<a href="https://developer.android.com/studio/intro/?hl=es-419">Developer Android</a>):
+            </p>
+            <article class="article-body">
+                <ul>
+                    <li>
+                        Un sistema de compilación basado en Gradle flexible
+                    </li>
+                    <li>
+                        Un emulador rápido con varias funciones para testing
+                    </li>
+                    <li>
+                        Un entorno unificado en el que puedes realizar desarrollos para todos los dispositivos Android
+                    </li>
+                    <li>
+                        Instant Run para aplicar cambios mientras tu app se ejecuta sin la necesidad de compilar un nuevo APK
+                    </li>
+                    <li>
+                        Integración de plantillas de código y GitHub para ayudarte a compilar funciones comunes de las apps e importar ejemplos de código
+                    </li>
+                    <li>
+                        Gran cantidad de herramientas y frameworks de prueba
+                    </li>
+                    <li>
+                        Herramientas Lint para detectar problemas de rendimiento, usabilidad, compatibilidad de versión, etc.
+                    </li>
+                </ul>
+                <figure>
+                    <img src="../assets/images/laboratorio1/devAndroid.png" alt="DevelopersAndroid" style="width:75%;">
+                </figure>
+            </article>
+        </section>
+
+        <section id="Project">
+            <h2>Creación y configuración de un proyecto básico.</h2>
+
+            <p>
+                Al inciar Android Studio, si no existe ningún tipo de actualización, error de inicio o algún proyecto ya abierto, se dezpliega la siguiente pantalla, de la cual se seleccionará la opción de <em>Start a New Android Studio project</em>.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/1.png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <p>
+                Si existe algún proyecto ya abierto dentro del IDE, se tendra que seleccionar desde el menú desplegable de <em>File</em> la opción de <em>New &gt; New Project</em>.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/1(2).png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <p>
+                A continuación se desplegará un pantalla donde se elegirá la primera actividad del proyecto; para este laboratorio se seleccionará la actividad vacia.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/2.png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <p>
+                Luego se configurará el nombre tanto del proyecto como del paquete en el que se trabajará (<em>com.empresa.proyecto</em>); como dato importante, en esta pantalla se seleccionará la API para la cual la aplicación será compatible, que en este caso será la API 16.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/3.png" alt="AndroidInit" style="width:75%">
+            </figure>
+        </section>
+
+        <section id="Struct">
+            <h2>
+                Estructura de un proyecto Android.
+            </h2>
+            
+            <p>
+                Una vez creado y configurado el proyecto, se auto generarán muchos ficheros y directorios importantes para el buen funcionamiento del mismo. Conocer la estructura y jerarquia que este posee es muy importante para un desarrollo ágil y efectivo de cualquier aplicación. A continuación se presentará esta estructura y se detallará que función cumple cada uno de los directorios en el proyecto.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/4.png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <article class="article-body">
+                <ol>
+                    <li>
+                        <strong>manifests:</strong> Contiene el archivo <i><a href="https://developer.android.com/guide/topics/manifest/manifest-intro?hl=es-419">AndroidManifest.xml</a></i>, el cual proporciona información esencial sobre tu aplicación al sistema Android para poder ejecutar el código de la misma.
+                    </li>
+                    <li>
+                        <strong>java:</strong> Contiene los archivos fuente <em>.java</em>, en los cuales se desarrolla la lógica de la aplicación.
+                    </li>
+                    <li>
+                        <strong>generatedJava:</strong> Contiene todas las clases y librerias auto generadas, las cuales son utilizadas al momento de compilar el proyecto.
+                    </li>
+                    <li>
+                        <strong>res:</strong> Contiene todos los ficheros de recursos necesarios para el proyecto: imágenes, layouts,
+                        cadenas de texto, etc.
+                        <ol>
+                            <li>
+                                <strong>drawable:</strong> Contiene las imágenes y otros elementos gráficos usados para la aplicación. A démas se definen diferentes recursos dependiendo de la resolución y densidad de la pantalla.
+                            </li>
+                            <li>
+                                <strong>layout:</strong> Contiene los ficheros XML donde se definen las diferentes pantallas de la interfaz gráfica.
+                            </li>
+                            <li>
+                                <strong>mipmap:</strong> Contiene los iconos de lanzamiento de la aplicación (el icono que aparecerá en el menú de aplicaciones del dispositivo) para las distintas densidades de pantalla existentes.
+                            </li>
+                            <li>
+                                <strong>values:</strong> Contiene otros ficheros XML de recursos de la aplicación, como por ejemplo cadenas de texto (strings.xml), estilos (styles.xml), colores (colors.xml), arrays de valores (arrays.xml), tamaños (dimens.xml), etc.
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <strong>Gradle Scrips:</strong> Contiene los ficheros de configuración del Gradle de Android Studio (Sistema de compliación); estos son auto generados pero pueden ser modificados para diversos usos.
+                    </li>
+                </ol>
+            </article>
+        </section>
+
+        <section id="Short">
+            <h2>Atajos de teclado para Android Studio</h2>
+            
+            <p>
+                El IDE nos proporciona muchos atajos de teclado, los cuales tienen por fin mejorar la productividad, eficiciencia y eficacia al momento de desarrollar. A continuación se enlistarán algunos atajos que se considerán de mayor uso o más prácticos.
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Tab Navigation:</strong> Estos atajos permiten navegar a través de los editores (tabs) abiertos dentro del IDE. Su uso se resume en la combinación de teclas <em>Alt + Left</em> para la tab izquierda, y <em>Alt + Right</em> para la derecha.
+                </li>
+                <li>
+                    <strong>Make Project:</strong> Compila el proyecto, descargando o actualizando sus dependencias, instanciando recursos, etc. Esta opción esta disponible a través la combinación <em>Shift + F9</em>.
+                </li>
+                <li>
+                    <strong>Run 'app':</strong> Realliza todo el proceso de compilación y busca un dispositivo movil o emulador donde instalar la APK generada; usualmente utilizada para pruebas. Combinación de teclas: <em>Shift + F10</em>.
+                </li>
+                <li>
+                    <strong>Search Everywhere:</strong> Este atajo sirve para buscar coincidencias dentro de todo el proyecto. Se activa presionando dos veces la tecla <em>Shift</em>.
+
+                    <figure>
+                        <img src="../assets/images/laboratorio1/5.png" alt="AndroidInit" style="width:75%">
+                    </figure>
+                </li>
+                <li>
+                    <strong>Search Class:</strong> Este, a diferencia del anterior, solo busca coincidencias con la clases que están dentro del proyecto, y es útil para busquedas más específicas. Su atajo es <em>Ctrl + N</em>.
+                    
+                    <figure>
+                        <img src="../assets/images/laboratorio1/6.png" alt="AndroidInit" style="width:75%">
+                    </figure>
+                </li>
+                <li>
+                    <strong>Completion:</strong> Provee ayuda de auto completado para atributos, métodos, clases, Macros, sentencias, etc, además mostrará una pequeña descripción de cada item desplegado. Por defecto esta activado al escribir en el editor, pero también se puede hacer uso libre con la  combianción de teclas <em>Ctrl + Space</em>.
+
+                    <figure>
+                        <img src="../assets/images/laboratorio1/7.png" alt="AndroidInit" style="width:75%">
+                    </figure>
+                </li>
+                <li>
+                    <strong>Surround with:</strong> Encierra el trozo de código seleccionado en alguna sentencia lógica de encapsulamiento como <em>if, switch, while, for</em>,etc. Para acceder al menú contextual, primero se debe seleccionar alguna porción de código y luego presionar la combinación <em>Ctrl + Alt + T</em>. 
+
+                    <figure>
+                        <img src="../assets/images/laboratorio1/8.png" alt="AndroidInit" style="width:75%">
+                    </figure>
+                </li>
+                <li>
+                    <strong>Generate:</strong> Auto genera distintos bloques de códigos dependiendo del contexto en el que se utilice el atajo (Constructores, setters, getters, toString(), etc). Este menú se activa al presionar la combinación <em>Alt + insert</em>.
+
+                    <figure>
+                        <img src="../assets/images/laboratorio1/9.png" alt="AndroidInit" style="width:75%">
+                    </figure>
+                </li>
+            </ul>
+        </section>
+
+        <section id="GIT">
+            <h2>Sistema de control de versiones (Git).</h2>
+
+            <p>
+                Recapitulando de cursos anteriores, un control de versiones es la gestión de los diversos cambios que se realizan sobre los elementos de algún producto o la configuración del mismo. Una versión, revisión o edición de un producto, es el estado en el que se encuentra el mismo en un momento dado de su desarrollo o modificación.
+            </p>
+
+            <p>
+                El sistema de control de versiones más utilizado es Git. Este es implementado por Android Studio a través de su gama de herraminetas del VCS (del inglés <em>Version Control System</em>); por lo que se permite llevar el control de las versiones del proyecto de forma fácil e intuitiva. Además integra funciones que permiten la conexión con sistemas Git en línea como <em><a href="https://github.com/">Github</a></em>.
+            </p>
+
+            <p>
+                Dentro de las facilidades que ofrece el VCS del IDE se encuetran la creación de repositorios, realizar <em>commits</em>, publicar repositorios en línea, realizar <em>pull</em> y <em>push</em> a cualquier repositorio con permisos, etc. A continuación se presentarán los pasos para la publicación de un proyecto, la gestión de versiones, y la clonación de cualquier repositorio en línea.
+            </p>
+
+            <h3>Creación del repositorio.</h3>
+
+            <p>
+                En primer lugar se debe seleccionar dentro del menu desplegable <em>VCS</em>, la opción <em>Import Into Version Control &gt; Share Project On Github</em>.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/10.png" alt="AndroidInit" style="width:75%">
+            </figure>
+            
+            <p>
+                Inmediatamente después el IDE pedirá las credenciales del servicio Github; una vez ingresadas se desplegará la primera pantalla de configuración donde se establecerá el nombre del repositorio y una breve descripción del mismo. Luego se realizará el primer <em>commit</em>, al cual se le podrá agregar un comentario referente al inicio del proyecto. Al finalizar se publicará el repositorio en el sitio de github que se haya especificado.
+            </p>
+
+            <figure>
+                <img src="../assets/images/laboratorio1/11.png" alt="AndroidInit" style="width:75%">
+            </figure>
+            <figure>
+                <img src="../assets/images/laboratorio1/12.png" alt="AndroidInit" style="width:75%">
+            </figure>
+            <figure>
+                <img src="../assets/images/laboratorio1/13.png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <h3>Manejo de versiones</h3>
+
+            <p>
+                El manejo básico de versiones en Android Studio se maneja con tres atajos principales <strong><em>commit</em></strong> (<em>Ctrl + k</em>), <strong><em>push</em></strong> (<em>Ctrl + Shift + K</em>) y <strong><em>pull</em></strong> (<em>Ctrl + T</em>).
+            </p>
+            <p>
+                A continuación se presentará un ejemplo, realizando una modificación a cualquier archivo, generando una nueva versión y publicandola. Al archivo <em>MainActivity.java</em> se le agregará un bloque de comentario; notar que al modificarlo Inmediatamente se muestra como un cambio en la versión actual del VCS.
+            </p>
+            <figure>
+                <img src="../assets/images/laboratorio1/14.png" alt="AndroidInit" style="width:75%">
+            </figure>
+            
+            <p>
+                <strong>Ctrl + K</strong>
+            </p>
+            <figure>
+                <img src="../assets/images/laboratorio1/15.png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <p>
+                <strong>Ctrl + Shift +K</strong>
+            </p>
+            <figure>
+                <img src="../assets/images/laboratorio1/16.png" alt="AndroidInit" style="width:75%">
+            </figure>
+
+            <p>
+                Al realizar el <em>Push</em>, se actualizará el repositorio en el servicio en línea de Github.
+            </p>
+
+            <h3>Clonar repositorio en linea</h3>
+
+            <p>
+                Otra función que provee el VCS del IDE es la clonación de repositorios publicados en servicios en línea de control de versiones, como Github. Para ello se selecciona, dentro de la pantalla inicial de Android Studio, <em>Check out project from Version Control > Git</em>, e Inmediatamente solicitará el enlace del repositorio a clonar; si se posee los permisos necesarios para clonarlo no se generará ningún problema.
+            </p>
+            <figure>
+                <img src="../assets/images/laboratorio1/17.png" alt="AndroidInit" style="width:75%">
+            </figure>
+            <figure>
+                <img src="../assets/images/laboratorio1/18.png" alt="AndroidInit" style="width:75%">
+            </figure>
+        </section>
+
+        <section id="Excercise">
+            <h2>Ejercicio</h2>
+
+            <ul>
+                <li>
+                    Haciendo uso de los conceptos anteriores, cree un proyecto básico en Android Studio, dentro del mismo cree un repositorio de Git para el control de versiones y súbalo al servicio en línea de Github haciendo uso del VCS propocionado por el IDE.
+                </li>
+
+                <li>
+                    Dentro del proyecto realice cualquier cambio a la GUI de la aplicación y realice la publicación de la nueva versión del proyecto.
+                </li>
+
+                <li>
+                    Por último clone, el siguiente repositorio: <a href="">Repositorio</a>, y corralo haciendo uso de la máquina virtual incluida en el IDE. 
+                </li>
+            </ul>
+        </section>
+
+    </article>
+
+     <!-- Footer Implementation -->
+     <footer>
+        <article>
+            <p><em>
+                “Siempre parece imposible hasta que se hace”
+            </em></p>
+            
+            <p id="author">
+                Nelson Mandela.
+            </p>
+        </article>
+    </footer>
+
+    <!-- Home Button -->
+    <span id="HomeBtn"><i class="fas fa-chevron-up"></i></span>
+</body>
+
+<!-- JS scripts area -->
+<script src="../assets/js/jquery-3.3.1.min.js"></script>
+<script src="../assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="../assets/js/javaScript.js"></script>
+<script src="../assets/js/highlight.pack.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+    sideMenuControl();
+</script>
+
+</html>
