@@ -2,7 +2,7 @@
     font-family: 'Raleway', sans-serif;
     
     --code-color : #2c2c54;
-    --psudo-black: rgba(0,0,0,0.5);
+    --psudo-black: rgba(0,0,0,0.7);
     --down-btn: #6ab04c;
     --nav-color-1: #689F38;
     --nav-color-2: #388E3C;
@@ -124,7 +124,7 @@ header#front-img{
 
     width: 100%;
     height: 100vh;
-    padding: 0 10em;
+    padding: 0 7.5em;
 
     color: white;
     text-align: center;
