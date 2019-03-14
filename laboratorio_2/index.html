@@ -294,8 +294,12 @@
                 <p style="padding-left:1.5em;">
                     Referencia Android Developer: <a href="https://developer.android.com/reference/android/widget/LinearLayout">LinearLayout.</a>
                 </p>
-
-                <h4>Principales atributos:</h4>
+                <p>
+                    Linear Layout es el viewgroup que nos permite posicionar elementos en una direcci&oacute;n, uno despu&eacute;s de otro.
+                    Se pueden posicionar tanto vertical como horizontalmente.
+                </p>
+                <p>El principal atributo que nos permite utilizar este layout es <code>layout_weight</code>, el cual permite darle una una proporci&oacute;n de la pantalla, a los elementos hijos con esta propiedad. Lo hace dividiendo el tamaño disponible entre la cantidad de elementos hijos con esta propiedad, y se les asigna el valor que se le dio al atributo. Por ejemplo, si se tiene dos elementos con esta propiedad, con 1 y 2 respectivamente, el tamaño asignado ser&aacute; 1/3 y 2/3 respectivamente. Para usar esta propiedad se debe asignar a <code>layout_width</code> o <code>layout_height</code> cero, dependiendo en que direcci&oacute;n se quiere asignar la proporci&oacute;</p>
+                <h4>Ejemplo:</h4>
                 <pre>
                     <code class="xml">
         &lt;LinearLayout
@@ -327,8 +331,33 @@
                 <p style="padding-left:1.5em;">
                     Referencia Android Developer: <a href="https://developer.android.com/reference/android/widget/RelativeLayout">RelativeLayout.</a>
                 </p>
-
-                <h4>Principales atributos:</h4>
+                <p>
+                    Este layout nos permite posicionar sus elementos hijos de manera relativa a otro, mediante su id.
+                </p>
+                <div class="article-body">
+                    <!-- Subtitles -->
+                    <h3> Atributos que proporciona relative layout: </h3>
+                    <!-- Two-columns structure -->
+                    <div class="grid-div two-columns">
+                        <!-- Two-columns item -->
+                        <div class="article-body">
+                            <ul>
+                                <li>centerVertical</li>
+                                <li>below</li>
+                                <li>toLeftOf</li>
+                                <li>toRightOf</li>
+                            </ul>
+                        </div>
+                        <div class="article-body">
+                            <ul>
+                                <li>alignStart</li>
+                                <li>alignEnd</li>
+                                <li>alignParentTop</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <h4>Ejemplo:</h4>
                 <pre>
                     <code class="xml">
         &lt;RelativeLayout
