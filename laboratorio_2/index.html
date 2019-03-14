@@ -193,6 +193,15 @@
                     &lt;/LinearLayout&gt;
                 </code>
             </pre>
+
+            <div class="tip">
+                <h3>Atributos <em>layout</em>.</h3>
+
+                <p>
+                    Todos los atributos con la sintaxis <em>layout_&lt;something&gt;</em>, modifican el comportamiento de una característica en un View, tomando como referencia el ViewGroup en el que reside.
+                </p>
+            </div>
+
         </section>
 
         <section id="basic">
@@ -451,7 +460,73 @@
                         href="https://developer.android.com/reference/android/widget/GridLayout">GridLayout.</a>
                 </p>
 
-                <h4>Principales atributos:</h4>
+                <p>
+                    Este ViewGroup dispone de los elementos o nodos hijos adecuándolos, de forma visual, a una cuadrícula predefinida en sus atributos por una cantidad d filas o columnas.  
+                </p>
+
+                <p>
+                    GridLayout se incorporó a la gama de componentes de Android a partir de la API 21; pero con el fin de ser retro compatible, se creó una liberia de compatibilidad para versiones anteriores de las API. Esta debe de ser declarada en el archivo Gradle:Module en la sección de dependencias. 
+                </p>
+
+                <h4>Implementación de libreria de compatibilidad:</h4>
+
+                <pre>
+                    <code class="java">
+                        implementation 'com.android.support:appcompat-v7:28.0.0'
+                        implementation 'com.android.support:gridlayout-v7:28.0.0'
+                    </code>
+                </pre>
+
+                <p>
+                    Los atributos más importantes de este componente son <strong>columnCount</strong> y <strong>rowCount</strong>, los cuales determinan la cantidad de columnas y filas, respectivamente, y delimitan la cuadrícula del layout. Para los nodos hijos se puede decidir en que celda posicionarlo a través de los atributos <strong>layout_column</strong> y <strong>layout_row</strong> 
+                </p>
+
+                <h4>Ejemplo de uso: </h4>
+
+                <pre>
+                    <code class="xml">
+                        &lt;GridLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+                            xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+                            android:id=&quot;@+id/GridLayout1&quot;
+                            android:layout_width=&quot;wrap_content&quot;
+                            android:layout_height=&quot;wrap_content&quot;
+                            android:columnCount=&quot;3&quot;
+                            tools:context=&quot;.GridLayoutActivity&quot; &gt;
+                        
+                            &lt;Button
+                                android:id=&quot;@+id/button3&quot;
+                                android:layout_column=&quot;0&quot;
+                                android:layout_gravity=&quot;left|top&quot;
+                                android:layout_row=&quot;0&quot;
+                                android:text=&quot;Button&quot; /&gt;
+                            
+                            &lt;Button
+                                android:id=&quot;@+id/button1&quot;
+                                android:layout_column=&quot;1&quot;
+                                android:layout_gravity=&quot;left|top&quot;
+                                android:layout_row=&quot;0&quot;
+                                android:text=&quot;Button&quot; /&gt;
+                        
+                            &lt;Button
+                                android:id=&quot;@+id/button2&quot;
+                                android:layout_column=&quot;2&quot;
+                                android:layout_gravity=&quot;fill_vertical&quot;
+                                android:layout_row=&quot;0&quot;
+                                android:layout_rowSpan=&quot;2&quot;
+                                android:text=&quot;Button&quot; /&gt;
+                        
+                            &lt;Button
+                                android:id=&quot;@+id/button4&quot;
+                                android:layout_column=&quot;0&quot;
+                                android:layout_columnSpan=&quot;2&quot;
+                                android:layout_gravity=&quot;fill_horizontal&quot;
+                                android:layout_row=&quot;1&quot;
+                                android:text=&quot;Button&quot; /&gt;
+                        
+                        &lt;/GridLayout&gt;
+                    </code>
+                </pre>
+
             </section>
 
             <div class="tip">
