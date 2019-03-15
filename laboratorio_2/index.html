@@ -23,7 +23,7 @@
     <!-- Eductional basic information -->
     <p class="subject">
         Universidad Centroamericana "José Simeón Cañas".<br>
-        Programacion de dispositivos moviles.<br>
+        Programación de dispositivos móviles.<br>
         Ciclo 01/19.
     </p>
 
@@ -43,6 +43,7 @@
                         <li><a href="#groups">Grupos de visuales.</a><i class="fas fa-boxes"></i></li>
                         <li><a href="#events">Control de eventos.</a><i class="fas fa-boxes"></i></li>
                         <li><a href="#ejercicio">Ejercicios.</a><i class="fas fa-boxes"></i></li>
+                        <li><a href="#anexo">Anexos.</a><i class="fas fa-boxes"></i></li>
                     </ul>
                 </nav>
             </div>
@@ -120,23 +121,15 @@
             <h2>Introducción al diseño en Android.</h2>
 
             <p>
-                Un aspecto importante dentro del desarrollo móvil es la implementación de una interfaz gráfica con altos
-                estándares de calidad, debido que esta es el primer punto de interacción que tiene el usuario con la
-                aplicación. Android provee una amplia gama de componentes visuales previamente desarrollados y
-                compilados, que facilitan la implementación de cualquier UI.
+                Un aspecto importante dentro del desarrollo móvil es la implementación de una interfaz gráfica con altos estándares de calidad, debido que esta es el primer punto de interacción que tiene el usuario con la aplicación. Android provee una amplia gama de componentes visuales previamente desarrollados y compilados, que facilitan la implementación de cualquier UI.
             </p>
 
             <p>
-                Andorid realiza el manejo de la UI a través de la declaración de sus componentes en archivos de tipo XML
-                (eXtensible Markup Language); Como todo lenguaje de marcado, XML basa su uso en la utilización de
-                etiquetas, atributos, y valores, permitiendo la declaración de elementos con un alto grado de
-                personalización.
+                Andorid realiza el manejo de la UI a través de la declaración de sus componentes en archivos de tipo XML (eXtensible Markup Language); Como todo lenguaje de marcado, XML basa su uso en la utilización de etiquetas, atributos, y valores, permitiendo la declaración de elementos con un alto grado de personalización.
             </p>
 
             <p>
-                La estructura básica del diseño de una UI en Android se basa en conjuntos de componentes visuales
-                agrupados dentro de contenedores (ViewGroups), estos son definidos dentro de un XML, el cual será
-                inflado por la parte lógica de la app en algún punto de la ejecución.
+                La estructura básica del diseño de una UI en Android se basa en conjuntos de componentes visuales agrupados dentro de contenedores (ViewGroups), los cuales serán inflado por la parte lógica de la app en algún punto de la ejecución.
             </p>
 
             <h4>Ejemplo estructura:</h4>
@@ -167,7 +160,8 @@
             </pre>
 
             <h4>Ejemplo UI Android:</h4>
-            <pre>
+            
+            <pre class="center">
                 <code class="xml">
         &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -220,12 +214,12 @@
                     Componente visual, cuya principal función es mostrar texto al usuario.
                 </p>
 
-                <h4>Principales atributos:</h4>
+                <h4>Ejemplo:</h4>
 
                 <pre>
                     <code class="xml">
         &lt;TextView
-            android:id=&quot;+id/tv_id&quot;
+            android:id=&quot;@+id/tv_id&quot;
             android:layout_width=&quot;wrap_content&quot;
             android:layout_height=&quot;wrap_content&quot;
             android:textSize=&quot;20sp&quot;
@@ -247,10 +241,11 @@
                     Componente visual, cuya principal función es servir como punto de entrada de texto para el usuario.
                 </p>
 
+                <h4>Ejemplo:</h4>
                 <pre>
                     <code class="xml">
         &lt;EditText
-            android:id=&quot;+id/et_id&quot;
+            android:id=&quot;@+id/et_id&quot;
             android:layout_width=&quot;match_parent&quot;
             android:layout_height=&quot;wrap_content&quot;
             android:hint=&quot;Programaci&oacute;n de dispositivos m&oacute;viles.&quot;
@@ -269,7 +264,7 @@
 
                 <p>
                     Componente visual, cuya principal función es servir como punto de entrada para el usuario, donde se
-                    reacciona a partir de la interacción de toques.
+                    reacciona a partir de la interacción con toques.
                 </p>
 
                 <h4>Ejemplo:</h4>
@@ -304,6 +299,7 @@
                     multi-seleccionables.
                 </p>
 
+                <h4>Ejemplo:</h4>
                 <pre>
                     <code class="xml">
         &lt;CheckBox android:id=&quot;@+id/checkbox_meat&quot;
@@ -342,6 +338,7 @@
                     Grupo de componentes visuales que muestran al usuario una lista con items uni-seleccionables.
                 </p>
 
+                <h4>Ejemplo:</h4>
                 <pre>
                     <code class="xml">
         &lt;RadioGroup xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -369,9 +366,7 @@
             <div class="tip">
                 <h3>Consejo.</h3>
                 <p>
-                    Todos estos componentes contienen una gran cantidad de atributos; para lograr una alta
-                    personalización de los componentes se recomienda la lectura de las referencias a Android Developer
-                    de cada componente, ya que ahí se detalla cada atributo y su función para cada uno de ellos.
+                    Todos estos componentes contienen una gran cantidad de atributos; para lograr una alta personalización se recomienda la lectura de las referencias a Android Developer de cada uno de ellos, ya que ahí se detalla cada atributo y la función de cada uno.
                 </p>
             </div>
         </section>
@@ -393,20 +388,17 @@
                 </p>
 
                 <p>
-                    Linear Layout es el viewgroup que nos permite posicionar elementos en una direcci&oacute;n, uno despu&eacute;s de otro.
-                    Se pueden posicionar tanto vertical como horizontalmente.
+                    Linear Layout es el viewgroup que nos permite posicionar elementos en una direcci&oacute;n, uno despu&eacute;s de otro. Se pueden posicionar tanto vertical como horizontalmente.
                 </p>
-                <p>El principal atributo que nos permite utilizar este layout es <code>layout_weight</code>, el cual permite darle una una proporci&oacute;n de la pantalla, a los elementos hijos con esta propiedad. Lo hace dividiendo el tamaño disponible entre la cantidad de elementos hijos con esta propiedad, y se les asigna el valor que se le dio al atributo. Por ejemplo, si se tiene dos elementos con esta propiedad, con 1 y 2 respectivamente, el tamaño asignado ser&aacute; 1/3 y 2/3 respectivamente. Para usar esta propiedad se debe asignar a <code>layout_width</code> o <code>layout_height</code> cero, dependiendo en que direcci&oacute;n se quiere asignar la proporci&oacute;n.</p>
-                
-                <figure style="justify-content: right">
-                    <img style="width: 30%; " src="../assets/images/laboratorio2/1.png" alt="">
-                </figure>
+                <p>
+                    El principal atributo que nos permite utilizar este layout es <code>layout_weight</code>, el cual permite darle una una proporci&oacute;n de la pantalla, a los elementos hijos con esta propiedad. Lo hace dividiendo el tamaño disponible entre la cantidad de elementos hijos con esta propiedad, y se les asigna el valor que se le dio al atributo. Por ejemplo, si se tiene dos elementos con esta propiedad, con 1 y 2 respectivamente, el tamaño asignado ser&aacute; 1/3 y 2/3 respectivamente. Para usar esta propiedad se debe asignar a <code>layout_width</code> o <code>layout_height</code> cero, dependiendo en que direcci&oacute;n se quiere asignar la proporci&oacute;n.
+                </p>
                 
                 <h4>Ejemplo:</h4>
                 <pre>
                     <code class="xml">
         &lt;LinearLayout
-            android:id=&quot;+id/ll_id&quot;
+            android:id=&quot;@+id/ll_id&quot;
             android:layout_width=&quot;match_parent&quot;
             android:layout_height=&quot;match_parent&quot;
             android:orientation=&quot;vertical&quot;&gt;
@@ -460,19 +452,19 @@
                         <!-- Two-columns item -->
                         <div class="article-body">
                             <ul>
-                                <li>centerVertical</li>
-                                <li>above</li>
-                                <li>below</li>
-                                <li>toLeftOf</li>
-                                <li>toRightOf</li>
+                                <li>layout_centerVertical</li>
+                                <li>layout_above</li>
+                                <li>layout_below</li>
+                                <li>layout_toLeftOf</li>
+                                <li>layout_toRightOf</li>
                             </ul>
                         </div>
                         <div class="article-body">
                             <ul>
-                                <li>alignStart</li>
-                                <li>alignEnd</li>
-                                <li>alignParentTop</li>
-                                <li>alignParentBottom</li>
+                                <li>layout_alignStart</li>
+                                <li>layout_alignEnd</li>
+                                <li>layout_alignParentTop</li>
+                                <li>layout_alignParentBottom</li>
                             </ul>
                         </div>
                     </div>
@@ -481,32 +473,35 @@
                 <pre>
                     <code class="xml">
         &lt;RelativeLayout
-            android:id=&quot;+id/ll_id&quot;
+            android:id=&quot;@+id/ll_id&quot;
             android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            android:orientation=&quot;vertical&quot;&gt;
+            android:layout_height=&quot;match_parent&quot;&gt;
 
             &lt;EditText
-                android:id=&quot;+id/et_message1&quot;
+                android:id=&quot;@+id/et_message1&quot;
                 android:layout_width=&quot;match_parent&quot;
                 android:layout_height=&quot;wrap_content&quot;
-                android:hint=&quot;@string/message1&quot; /&gt;
+                android:layout_centerVertical=&quot;true&quot;
+                android:gravity=&quot;center&quot;
+                android:hint=&quot;Mensaje 1&quot; /&gt;
 
             &lt;EditText
-                android:id=&quot;+id/et_message2&quot;
+                android:id=&quot;@+id/et_message2&quot;
                 android:layout_width=&quot;match_parent&quot;
                 android:layout_height=&quot;wrap_content&quot;
-                android:below=&quot;@id/et_message1&quot;
-                android:hint=&quot;@string/message2&quot; /&gt;
+                android:layout_below=&quot;@id/et_message1&quot;
+                android:gravity=&quot;center&quot;
+                android:hint=&quot;Mensaje 2&quot; /&gt;
 
             &lt;TextView
-                android:id=&quot;+id/tv_id&quot;
-                android:layout_width=&quot;wrap_content&quot;
+                android:id=&quot;@+id/tv_id&quot;
+                android:layout_width=&quot;match_parent&quot;
                 android:layout_height=&quot;wrap_content&quot;
-                android:layout_toLeftOf=&quot;@id/message2&quot;
+                android:gravity=&quot;center&quot;
+                android:layout_above=&quot;@id/et_message1&quot;
                 android:textSize=&quot;20sp&quot;
-                android:text=&quot;Programaci&oacute;n de dispositivos m&oacute;viles.&quot;/&gt;            
-                
+                android:text=&quot;Programaci&oacute;n de dispositivos m&oacute;viles.&quot;/&gt;
+
         &lt;/RelativeLayout&gt;
                     </code>
                 </pre>
@@ -525,7 +520,7 @@
                 </p>
 
                 <p>
-                    GridLayout se incorporó a la gama de componentes de Android a partir de la API 21; pero con el fin de ser retro compatible, se creó una liberia de compatibilidad para versiones anteriores de las API. Esta debe de ser declarada en el archivo Gradle:Module en la sección de dependencias. 
+                    GridLayout se incorporó a la gama de componentes de Android a partir de la API 21; pero con el fin de ser retro compatible, se creó una liberia de compatibilidad para versiones anteriores de esta API. Esta debe de ser declarada en el archivo Gradle:Module en la sección de dependencias. 
                 </p>
 
                 <h4>Implementación de libreria de compatibilidad:</h4>
@@ -538,10 +533,10 @@
                 </pre>
 
                 <p>
-                    Los atributos más importantes de este componente son <strong>columnCount</strong> y <strong>rowCount</strong>, los cuales determinan la cantidad de columnas y filas, respectivamente, y delimitan la cuadrícula del layout. Para los nodos hijos se puede decidir en que celda posicionarlo a través de los atributos <strong>layout_column</strong> y <strong>layout_row</strong> 
+                    Los atributos más importantes de este componente son <code>columnCount</code> y <code>rowCount</code>, los cuales determinan la cantidad de columnas y filas, respectivamente, y delimitan la cuadrícula del layout. Para los nodos hijos se puede decidir en que celda posicionarlo a través de los atributos <code>layout_column</code> y <code>layout_row</code> 
                 </p>
 
-                <h4>Ejemplo de uso: </h4>
+                <h4>Ejemplo: </h4>
 
                 <pre>
                     <code class="xml">
@@ -559,14 +554,14 @@
                 android:layout_column=&quot;0&quot;
                 android:layout_gravity=&quot;left|top&quot;
                 android:layout_row=&quot;0&quot;
-                android:text=&quot;Button&quot; /&gt;
+                android:text=&quot;Button1&quot; /&gt;
             
             &lt;Button
                 android:id=&quot;@+id/button1&quot;
                 android:layout_column=&quot;1&quot;
                 android:layout_gravity=&quot;left|top&quot;
                 android:layout_row=&quot;0&quot;
-                android:text=&quot;Button&quot; /&gt;
+                android:text=&quot;Button2&quot; /&gt;
 
             &lt;Button
                 android:id=&quot;@+id/button2&quot;
@@ -574,7 +569,7 @@
                 android:layout_gravity=&quot;fill_vertical&quot;
                 android:layout_row=&quot;0&quot;
                 android:layout_rowSpan=&quot;2&quot;
-                android:text=&quot;Button&quot; /&gt;
+                android:text=&quot;Button3&quot; /&gt;
 
             &lt;Button
                 android:id=&quot;@+id/button4&quot;
@@ -582,7 +577,7 @@
                 android:layout_columnSpan=&quot;2&quot;
                 android:layout_gravity=&quot;fill_horizontal&quot;
                 android:layout_row=&quot;1&quot;
-                android:text=&quot;Button&quot; /&gt;
+                android:text=&quot;Button4&quot; /&gt;
 
         &lt;/GridLayout&gt;
                     </code>
@@ -593,9 +588,7 @@
             <div class="tip">
                 <h3>Consejo.</h3>
                 <p>
-                    Todos estos ViewGroups contienen una gran cantidad de atributos; para lograr una alta
-                    personalización de los componentes se recomienda la lectura de las referencias a Android Developer
-                    de cada componente, ya que ahí se detalla cada atributo y su función para cada uno de ellos.
+                    Todos estos ViewGroups contienen una gran cantidad de atributos; para lograr una alta personalización se recomienda la lectura de las referencias a Android Developer de cada uno de ellos, ya que ahí se detalla cada atributo y la función de cada uno.
                 </p>
             </div>
         </section>
@@ -609,7 +602,7 @@
             </p>
 
             <p>
-                El control de eventos en Android se refiere a la forma en que, tanto la UI como la lógica, deben de compoertarse ante interaciones del usuario, pricipalmente representadas por <em>taps</em> en la pantalla.
+                El control de eventos en Android se refiere a la forma en que, tanto la UI como la lógica, deben de comportarse ante interaciones del usuario, pricipalmente representadas por <em>toques</em> en la pantalla.
             </p>
 
             <p>
@@ -625,7 +618,7 @@
             </ul>
 
             <p>
-                A continuación se mostrará la implementación de un <em>listener</em> en una View específica, en este caso un botón con un <em>onClickListener</em>; esto no significa que solo a los botones se le pueden aplicar <em>listeners</em> o que este sea el único <em>listener</em> a implementarse, si no que esto puede realizarse a cualquier elemento que en su cadena de herencia tenga la clase <strong>View</strong> con cualquiera de los anteriores <em>listeners</em>.
+                A continuación se mostrará la implementación de un <em>listener</em> en una View específica, en este caso un botón con un <em>onClickListener</em>; esto no significa que solo a los botones se le pueden aplicar <em>listeners</em> o que este sea el único <em>listener</em> a implementarse; esto puede realizarse a cualquier objeto que en su cadena de herencia tenga la clase <strong>View</strong>, y ademas puede implementarse en él cualquiera de los anteriores <em>listeners</em>.
             </p>
 
             <h4>Ejemplo:</h4>
@@ -684,21 +677,73 @@
                     </div>
                 </li>
                 <li>
-                    Haciendo uso de GridLayout, realice una galería de imagenes de 3 columnas y 3 filas; al darle click a una imagen cualquiera deberá cambiar de recurso (imagen). Recomendación: Definir una secuencia de imagenes, donde cada imagen tenga un índice.
+                    Haciendo uso de GridLayout, realice una galería de imagenes de 3 columnas y 3 filas; al darle click a una imagen cualquiera deberá cambiar de recurso (imagen). Recomendación: Definir una secuencia de imágenes, donde cada imagen tenga un índice que la represente.
 
                     <figure>
                         <img style="width: 25%" src="../assets/images/laboratorio2/6.png" alt="">
                     </figure>
                 </li>
                 <li>
-                    Haciendo uso de LinearLayout y pesos, realizar una UI que contenga 3 paneles distribuidos de forma uniforme con colores predeterminados de fondo (#ff0000, #00ff00, #0000ff). Al hacer click en cualquiera de los paneles este cambiará de color variando únicamente uno de sus componentes RGB (R para el primer panel, y así respectivamente). Recomendación: Guardar los colores en el archivo colors.xml; Al menos 6 colores por panel.
+                    Haciendo uso de LinearLayout y el diseño con pesos, realizar una UI que contenga 3 paneles distribuidos de forma uniforme con colores predeterminados de fondo (#ff0000, #00ff00, #0000ff). Al hacer click en cualquiera de los paneles este cambiará de color variando únicamente uno de sus componentes RGB (R para el primer panel, y así respectivamente). Recomendación: Guardar los colores en el archivo colors.xml; Al menos 6 colores por panel.
 
                     <figure>
                         <img style="width: 25%" src="../assets/images/laboratorio2/7.png" alt="">
                     </figure>
                 </li>
             </ul>
+        </section>
 
+        <section id="anexo">
+            <h3>
+                Anexos.
+            </h3>
+
+            <div class="grid-div three-columns">
+                <figure>
+                    <img src="../assets/images/laboratorio2/8.png" alt="">
+                    <span>Ejemplo UI Android</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/9.png" alt="">
+                    <span>Ejemplo TextView</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/10.png" alt="">
+                    <span>Ejemplo EditText</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/11.png" alt="">
+                    <span>Ejemplo Button</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/12.PNG" alt="">
+                    <span>Ejemplo CheckBox</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/13.PNG" alt="">
+                    <span>Ejemplo RadioGroup</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/14.PNG" alt="">
+                    <span>Ejemplo LinearLayout</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/15.PNG" alt="">
+                    <span>Ejemplo RelativeLayout</span>
+                </figure>
+
+                <figure>
+                    <img src="../assets/images/laboratorio2/16.PNG" alt="">
+                    <span>Ejemplo GridLayout</span>
+                </figure>
+            </div>
         </section>
     </article>
 
@@ -706,11 +751,11 @@
     <footer>
         <article>
             <p><em>
-                    “Siempre parece imposible hasta que se hace”
+                    “En cuestiones de cultura y de saber, sólo se pierde lo que se guarda; sólo se gana lo que se da.”
                 </em></p>
 
             <p id="author">
-                Nelson Mandela.
+                Antonio Machado.
             </p>
         </article>
     </footer>
