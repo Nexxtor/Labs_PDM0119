@@ -15,7 +15,7 @@
 
     <link rel="icon" href="../assets/images/icons/android.png">
 
-    <title>Laboratorio 2</title>
+    <title>Laboratorio 3</title>
 </head>
 
 <body id="id_body">
@@ -107,6 +107,117 @@
 
         <section id="introduccionAct">
             <h3>Introducción a las Actividades.</h3>
+            <h4>Conceptualización</h4>
+
+            <p>
+                Una actividad es un componente de Android destinado a interactuar con el usuario manejando la lógica y UI de la aplicación. Generalmente dentro de las apps existen múltiples actividades vinculadas; esto implica que una Actividad puede iniciar otra dentro de su ejecución.
+            </p>
+
+            <p>
+                Normalmente la relación de dependencia entre actividades es mínima, por lo que los procesos que realiza una, mayormente no compromenten o cambian los que realiza otra actividad.
+            </p>
+
+            <h4>Creación de una Actividad.</h4>
+
+            <p>
+                Normalmente para crear una actividad se utiliza el asistente de AndroidStudio, donde gráficamente se seleccionan todas las opciones y configuraciones que se deseen heredar al comportamento de la actividad. Esto se encuantra al dar click derecho sobre el directorio donde se encuentra nuestro código fuente y seleccionar <em>New->Activity->Empty Activity</em>
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/training/basics/firstapp/starting-activity">Iniciar otra Actividad.</a>
+            </p>
+
+            <p>
+                Para efectos de aprenizaje, se mostrará como crear una Actividad sin ayuda del asistente de AndroidStudio; para ello primero de agragará una clase a nuestro código fuente, dando click derecho al paquete y seleccionando <em>New->Java Class</em>; en este punto habrá que configurar el nombre y el tipo de clase.
+            </p>
+
+            <p>
+                Esta clase deberá heredar de <em>AppCompatActivity</em>, debido a que al heredar de la clase Activity no se tiene compatibilidad con otras versiones del sistema, y la aplicación quedará escapsulada a una sola versión de Android. A esta clase se le sobreescribirán dos callbacks importantes, <em>onCreate()</em> y <em>onResume()</em> (los cuales se explicarán posteriormente), que se encargarán de instanciar los recursos, y manejar tanto la UI como la lógica de la Actividad.
+            </p>
+
+            <pre>
+                <code class="java">
+        public class NewActivity extends AppCompatActivity {
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+            }
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+            }
+        }
+                </code>
+            </pre>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/topic/libraries/support-library/packages.html#v7-appcompat">App Compat</a>
+            </p>
+                
+            <p>
+                En este momento se debe generar la interfaz gráfica que manejara la Actividad; para ello se debe generar una archivo XML dentro del directorio Layout, dando click derecho al mismo y seleccionando <em>New->Layout resource file</em>. Por convención este deberá ser nombrado en minúscula y con la siguente sintaxis activity_&lt;nombre&gt;.xml.
+            </p>
+
+            <p>
+                Una vez creado el archivo XML, se debe enlazar a la Actividad por medio del método <em>setContentView()</em>, llamado en el callback <em>onCreate()</em>, y recibiendo por parametro el id del archivo XML. 
+            </p>
+            <pre>
+                <code class="java">
+        public class NewActivity extends AppCompatActivity {
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_new);
+            }
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+            }
+        }
+                </code>
+            </pre>
+
+            <p>
+                Por último se debe declarar la Actividad en el manifiesto de la aplicación (AndroidManifest.xml); para ello se hace uso de la etiqueta activity con el atributo name, indicandole al sistema que se hará uso de esa clase como Actividad. 
+            </p>
+
+            <pre>
+                <code class="xml">
+        &lt;manifest ...&gt;
+            &lt;application ...&gt;
+
+                &lt;activity android:name=&quot;.NewActivity&quot;&gt;&lt;/activity&gt;
+            
+            &lt;/application&gt;
+        &lt;/manifest&gt;
+                </code>
+            </pre>
+
+            <div class="tip">
+                <h3>Launcher</h3>
+
+                <p>
+                    El punto de entrada a una aplicación es manejado por una Actividad denominada como <em>Launcher</em> o actividad principal, y es la primera pantalla con la que el usuario puede interactuar en la app. Este atributo es asignado dentro del Manifiesto de la appa través de un <em>intent-filter</em>, por lo que no es característica de una actividad en específico.
+                </p>
+
+                <pre>
+                    <code class="xml">
+        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
+            &lt;intent-filter&gt;
+
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+                    </code>
+                </pre>
+            </div>
         </section>
 
         <section id="introduccionLC">
