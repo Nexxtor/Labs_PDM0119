@@ -45,7 +45,7 @@
             </div>
             <div class="main-front">
                 <h1>Laboratorio 03.</h1>
-                <h3>Viernes, 15 de marzo de 2019.</h3>
+                <h3>Viernes, 22 de marzo de 2019.</h3>
                 <div class="grid-div two-columns frontList">
                     <!-- Two-columns item -->
                     <div class="article-body">
@@ -121,6 +121,11 @@
 
             <p>
                 Normalmente para crear una actividad se utiliza el asistente de AndroidStudio, donde gráficamente se seleccionan todas las opciones y configuraciones que se deseen heredar al comportamento de la actividad. Esto se encuantra al dar click derecho sobre el directorio donde se encuentra nuestro código fuente y seleccionar <em>New->Activity->Empty Activity</em>
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/reference/android/app/Activity">Activity.</a>
             </p>
 
             <p style="padding-left:1.5em;">
@@ -222,18 +227,252 @@
 
         <section id="introduccionLC">
             <h3>Introducción al LifeCycle de una Actividad.</h3>
+            <h4>Conceptualización.</h4>
+
+            <p>
+                A diferencia de los demas paradigmas de programación cuyo inicio de flujo viene determinado por un método <code>main()</code>, una actividad responde a estados especificos dentro de un ciclo de vida; estos estados son controlados por el sistema y corresponden a métodos callbacks definidos dentro de la clase.
+            </p>
+
+            <h4>Callbacks de estado.</h4>
+
+            <ul>
+                <li>
+                    <strong>onCreate()</strong>: Recibe una llamada cuando se crea la actividad por primera vez. Aquí es donde se realizan todas las configuraciones estáticas normales: crear vistas, enlazar datos con listas, etc. 
+                </li>
+
+                <li>
+                    <strong>onStart()</strong>: Recibe una llamada justo antes de que la actividad se vuelva visible para el usuario.
+                </li>
+
+                <li>
+                    <strong>onResume()</strong>: Recibe una llamada justo antes de que la actividad comience a interactuar con el usuario. Normalmente la lógica de la aplicación se realiza en este método.
+                </li>
+
+                <li>
+                    <strong>onPause()</strong>: Recibe una llamada cuando el sistema está a punto de reanudar otra actividad. Este método generalmente se usa para confirmar los cambios sin guardar como datos persistentes, para detener animaciones y otras tareas que podrían estar consumiendo CPU, etc.
+                </li>
+
+                <li>
+                    <strong>onStop()</strong>: Recibe una llamada cuando la actividad ya no es visible para el usuario.
+                </li>
+
+                <li>
+                    <strong>onDestroy()</strong>: Recibe una llamada antes de que se destruya la actividad. Esta es la última llamada que recibirá la actividad. Esta puede invocarse por la finalización de la actividad, o porque el sistema destruye temporalmente esa instancia para ahorrar espacio. 
+                </li>
+            </ul>
+
+            <figure>
+                <img style = "width: 50%" src="../assets/images/laboratorio3/1.png" alt="">
+            </figure>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/guide/components/activities/activity-lifecycle">Understand the activity Lifecycle</a>
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/guide/components/activities/state-changes">Handle Activity State Changes</a>
+            </p>
         </section>
 
         <section id="permisos">
             <h3>Manejo de permisos.</h3>
-        </section>
 
-        <section id="introduccionInt">
-            <h3>Introducción a Intents.</h3>
+            <h4>Conceptualización</h4>
+
+            <p>
+                Una aplicación básica de Android no tiene permisos asociados de manera predeterminada. Esto significa que no puede hacer nada que pueda considerarse peligroso o negativo a la experiencia del usuario o los datos en el dispositivo. 
+            </p>
+
+            <p>
+                Para usar funciones que normalmente estan protegidas y bloquadas en el dispositivo, se debe hacer uso de permisos, incluyendo una o más etiquetas <code>&lt;uses-permission&gt;</code> en el manifiesto de la aplicación. Existen muchos tipos de permisos, desde el acceso a internet, compartir datos, usar mapas, etc.
+            </p>
+
+            <pre>
+                <code class="xml">
+        &lt;uses-permission android:name=&quot;android.permission.SEND_SMS&quot;/&gt;   
+                </code>
+            </pre>
+
+            <h4>Tipos de permisos.</h4>
+
+            <p>
+                    Debido a que cada aplicación de Android funciona en una zona de pruebas de proceso, las aplicaciones deben compartir recursos y datos de manera explícita. Esto se logra declarando los permisos que necesitan para capacidades adicionales no previstas por la zona de pruebas básica. Consecuencia de esto es la tipificación de los permisos en Android.
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Permisos normales</strong>: abarcan áreas en las que la aplicación tiene que acceder a datos o recursos fuera de su zona de pruebas, pero donde existe un riesgo mínimo para la privacidad del usuario o el funcionamiento de otras aplicaciones. Si una aplicación declara que necesita un permiso normal, el sistema le otorga automáticamente el permisos
+                </li>
+
+                <li>
+                    <strong>Permisos peligrosos:</strong> abarcan áreas en las cuales la aplicación requiere datos o recursos que incluyen información privada del usuario, o bien que podrían afectar los datos almacenados del usuario o el funcionamiento de otras aplicaciones. Si una aplicación declara que necesita un permiso riesgoso, el usuario tiene que otorgarle explícitamente el permiso.                        
+                </li>
+            </ul>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/guide/topics/permissions/overview">Permissions overview</a>
+            </p>
         </section>
 
         <section id="ManejoIntents">
-            <h3>Manejo de Intents.</h3>
+            <h3>Introducción a Intents.</h3>
+
+            <h4>Conceptualización</h4>
+
+            <p>
+                Una aplicación de AndroidStudio por lo general posee múltiples actividades con las que es posible interactuar; para ello existen los Intents, cuya funcionalidad pricipal es servir de puente y medio de comunicación entre dos actividades.
+            </p>
+
+            <p>
+                Existen dos tipos de Intents, aquellos que inician una instancia específica de una Actividad (Explícitios), y aquellas que inician cualquier componente capaz de realizar una acción en específico (implícito), como mandar un mensaje.
+            </p>
+
+            <h4>Manejo de intents explícitos.</h4>
+
+            <p>
+                Para contextualizar el uso de este tipo de intents, se tomará como base el ejemplo del inciso de <em>Actividades</em>, donde se tiene dos actividades. Para este ejemplo se iniciará <em>NewActivity</em> a paritr de <em>MainActivity</em>; además se pasarán datos a través del intent para procesarlos en el receptor.
+            </p>
+
+            <p><u>MainActivity.java</u></p>
+
+            <pre>
+                <code class="java">
+        public class MainActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+            }
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+            }
+        }
+                </code>
+            </pre>
+
+            <p><u>NewActivity.java</u></p>
+
+            <pre>
+                <code class="java">
+        public class NewActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_new);
+            }
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+            }
+        }
+                </code>
+            </pre>
+
+            <p>
+                Para efectos de centralizar datos de uso común (constantes globales), se hará uso de una nueva clase que contenga estos datos de forma pública y estática para facilitar el acceso de los mismos en cualquier instante.
+            </p>
+
+            <p><u>AppConstants.java</u></p>
+            <pre>
+                <code class="java">
+        public class AppConstants{
+            
+        }
+                </code>
+            </pre>
+
+            <p>
+                En primera instancia, dentro de MainActivity.java, se instacia un objeto de tipo <em>Intent</em>, que será el encargado de realizar la conexión entre ambas actividades. En un intent explícito, para asignar una clase destino se debe hacer desde su contructor, o a partir del método <code>setClass(Context context, Class classObj)</code> una vez ya instanciado el objeto.
+            </p>
+
+            <p>
+                Para agragar datos extras al intent, para ser porcesados por la Actividad receptora, se hace uso del método <code>putExtra(String key, ...)</code>, el cual implementa la filosofía de clave - valor; esto implica que ambas Actividades deben de concocer las claves de cada uno de los objetos enviados para poder hacer uso de los mismos. Este efecto se logrará a través de la clase auxiliar AppConstants, donde se definirán todas las claves para su uso. 
+            </p>
+
+            <p><u>AppConstants.java</u></p>
+            <pre>
+                <code class="java">
+        public class AppConstants {
+
+            public static String INTENT_MESSAGE_KEY  = "INTENT_KEY";
+        
+        }                        
+                </code>
+            </pre>
+
+            <p><u>MainActivity.java</u></p>
+
+            <pre>
+                <code>
+        public class MainActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+            }
+        
+            @Override
+            protected void onResume() {
+                super.onResume();
+        
+                Intent m_intent = new Intent(MainActivity.this, NewActivity.class);
+                m_intent.putExtra(AppConstants.INTENT_MESSAGE_KEY, "Mensaje enviado desde MainActivity");
+                startActivity(m_intent);
+        
+            }
+        }
+                </code>
+            </pre>
+
+            <p>
+                Para procesar y filtar el contenido de un intent en la actividad receptora, primero se debe capturar la instancia del mismo en un objeto, a través del método <code>getIntent()</code>, perteneciente al contexto de la Actividad.
+            </p>
+
+            <p>
+                Si la actividad no ha sido lanzada a partir de un Intent este método retorna nulo, por lo que se necesita verificar la existencia de dicho objeto, para poder acceder a su contenido posteriormente.
+            </p>
+
+            <p>
+                Como se ha hecho uso de un objeto de tipo String, como dato a compartir, para recuperarlo se debe hacer uso del método <code>getStringExtra(String key)</code>, perteneciente al intent, al cual se le proporciona la llave única que representa al dato en la colección. Se hará uso de un <code>Log.d()</code> para efectos de mostrar el resultado.
+            </p>
+
+            <p><u>NewActivity.java</u></p>
+
+            <pre>
+                <code class="java">
+        public class NewActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_new);
+        
+                String message = "Vacio";
+        
+                Intent m_intent = this.getIntent();
+                if(m_intent !=  null){
+                    message = m_intent.getStringExtra(AppConstants.INTENT_MESSAGE_KEY);
+                }
+        
+                Log.d("Message", message);
+            }
+
+            @Override
+            protected void onResume() {
+                super.onResume();
+            }
+        }
+                </code>
+            </pre>
         </section>
 
         <section id="IntentImplicito">
