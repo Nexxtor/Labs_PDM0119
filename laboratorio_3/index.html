@@ -28,7 +28,7 @@
     </p>
 
     <!-- Front image -->
-    <header id="front-img" style="background-image: url('../assets/images/main/laboratorio2.jpeg');">
+    <header id="front-img" style="background-image: url('../assets/images/main/laboratorio3.jpg');">
         <div class="blackManta">
             <!-- Float menu implementation -->
             <div class="float-menu">
@@ -39,7 +39,11 @@
                     <div></div>
                     <ul>
                         <li><a href="#introduccionAct">Introducción Activities.</a><i class="fas fa-code"></i></li>
-                        
+                        <li><a href="#introduccionLC">Introducción LifeCycle.</a><i class="fas fa-heart"></i></li>
+                        <li><a href="#permisos">Manejo de permisos.</a><i class="fas fa-scroll"></i></li>
+                        <li><a href="#ManejoIntents">Introducción Intents.</a><i class="fas fa-sign-out-alt"></i></li>
+                        <li><a href="#intentFilter">Intents externos.</a><i class="fas fa-sign-in-alt"></i></li>
+                        <li><a href="#ejercicios">Ejercicios.</a><i class="fas fa-dumbbell"></i></li>
                     </ul>
                 </nav>
             </div>
@@ -572,15 +576,114 @@
 
         </section>
 
-        <section id="IntentImplicito">
-            <h3>Recepción de Intents externos.</h3>
+        <section id="intentFilter">
+            <h3>Iniciar la aplicación a paritr de intents externos.</h3>
+            <h4>Conceptualización.</h4>
+
+            <p>
+                Hasta el momento se han tratado temas referentes al uso de intents para iniciar otra actividad o componente. Este inciso consiste en comprender como otorgar a una actividad la capacidad de manejar intents implícitos, sean estos provenientes de la misma aplicación o de cualquier otra externa.
+            </p>
+
+            <h4>Intent filter.</h4>
+            <p>
+                Antes de poder manejar cualquier intent dentro de la actividad, se le debe indicar al sistema que esta es capaz de atender y procesar llamadas de intents implicitos. Para ello, se introducira el uso de la etiqueta <code>intent-filter</code>, cuyo fin es determinar que intent implícito es capaz de manejar una actividad específica; esta etiqueta es declarada en el Manifiesto de la aplicación dentro de un nodo <code>activity</code>, y es definida por los siguientes nodos hijos:
+
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Acción</strong>: Indica la acción o procedimiento que se va atender dentor de la Actividad. Generalmente son valores definidos como Intent.ACTION_SEND, u otros.
+                </li>
+
+                <li>
+                    <strong>Datos</strong>: Especifica una descripción de los datos relacionados con el Intent, como tipos de datos aceptados o a manejar (MIMEtype), prefijos y esquemas URI, entre otros.
+                </li>
+
+                <li>
+                    <strong>Categoría</strong>: Ayuda a caracterizar a la actividad que manejará el Intent, a partir de otros paramentros como los gestos, posición de inicio, entre otros. Generalmente la mayoría de intents implícitos básicos estan definidos con la categoría CATEGORY_DEFAULT.
+                </li>   
+            </ul>
+
+            <pre>
+                <code class="xml">
+        &lt;activity android:name=&quot;ShareActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;
+                &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;
+                &lt;data android:mimeType=&quot;text/plain&quot;/&gt;
+                &lt;data android:mimeType=&quot;image/*&quot;/&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+                </code>
+            </pre>
+
+            <h4>Ejemplo.</h4>
+
+            <p>
+                Para ejemplificar este inciso, se hará uso de una nueva clase <em>NewActivity.java</em>, creada con anterioridad. Específicamente definiremos que la actividad será capaz de atender intents implicítos de "compartir", donde se procesará únicamente texto plano. Para ello se modificará el Manifest de la aplicación indicando el filtro dentro de la actividad.  
+            </p>
+
+            <p><u>AndroidManifest.xml</u></p>
+            <pre>
+                <code class="xml">
+        &lt;activity android:name=&quot;.NewActivity&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.SEND&quot;/&gt;
+                &lt;data android:mimeType=&quot;text/plain&quot;/&gt;
+                &lt;category android:name=&quot;android.intent.category.DEFAULT&quot;/&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+                </code>
+            </pre>
+
+            <p>
+                Con esto, el sistema de Android podrá interpretar que la Actividad <em>NewActivity.java</em> está preparada para procesar texto plano a través de la acción SEND. Por último se tiene que indicar dentro de la Actividad como se procesarán estos datos, que para efectos prácticos, es de la misma forma como se procesaron los intents en el inciso de intents explícitos; con la diferencia que en este caso se tendrán que usar claves generales para la obtención de datos.
+            </p>
+
+            <p><u>NewActivity.java</u></p>
+            <pre>
+                <code class="java">
+        public class NewActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_new);
+        
+                String message = "Vacio";
+        
+                Intent m_intent = this.getIntent();
+                if(m_intent !=  null){
+                    if(m_intent.getType().equals("text/plain")){
+                        message = m_intent.getStringExtra(Intent.EXTRA_TEXT);
+                    }
+                }
+        
+                Log.d("Message", message);
+            }
+        }
+                </code>
+            </pre>
+
+            <p>
+                Con esto la actividad queda preparada para antender cualquier intent referente a texto plano con acción SEND; por lo que, al utilizar la opción compartir, si solo se involucra texto plano, esta aparecerá en el diálogo del sistema que selecciona la aplicación receptora de los datos. 
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/guide/components/intents-filters">Intents y filtros de intents</a>
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/training/basics/intents/filters">Cómo permitir que otras apps inicien tu actividad</a>
+            </p>
         </section>
 
         <section id="ejercicios">
             <h3>Ejercicios.</h3>
         </section>
 
-        
     </article>
 
     <!-- Footer Implementation -->
