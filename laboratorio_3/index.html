@@ -230,7 +230,7 @@
             <h4>Conceptualización.</h4>
 
             <p>
-                A diferencia de los demas paradigmas de programación cuyo inicio de flujo viene determinado por un método <code>main()</code>, una actividad responde a estados especificos dentro de un ciclo de vida; estos estados son controlados por el sistema y corresponden a métodos callbacks definidos dentro de la clase.
+                A diferencia de los demás paradigmas de programación cuyo inicio de flujo viene determinado por un método <code>main()</code>, una actividad responde a estados especificos dentro de un ciclo de vida; estos estados son controlados por el sistema y corresponden a métodos callbacks definidos dentro de la clase.
             </p>
 
             <h4>Callbacks de estado.</h4>
@@ -473,6 +473,103 @@
         }
                 </code>
             </pre>
+
+            <h4>Manejo de intents implícitos.</h4>
+
+            <p>
+                Como se explicó con anterioridad, un intent implícito es aquel que no inicia un contexto específico, sino que inicia un componente capaz de resolver un problema en específico. Para este ejemplo, de igual fomra se hará uso de la clase MainActivity.java del inciso anterior.
+            </p>
+
+            <p><u>MainActivity.java</u></p>
+
+            <pre>
+                <code class="java">
+        public class MainActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+            }
+        
+            @Override
+            protected void onResume() {
+                super.onResume();
+            }
+        }
+                </code>
+            </pre>
+
+            <p>
+                En primer lugar se instancia un objeto Intent en la clase a utilizar. A este objeto se le deberá asignar una acción, que representa el tipo de procedimiento que se quiere realizar (enviar un mensaje por ejemplo). Esta acción se asigna a través del método <code>setAction()</code>. 
+            </p>
+
+            <p>
+                En este caso se hará uso de ACTION_SEND, o mejor conocido como la acción de "compartir", la cual permite enviar a otras actividades datos de forma general. Aunque esta no es la única acción o procedimiento que puede realizarse a partir de este tipo de intents.
+            </p>
+
+            <p>
+                Para este tipo de acción se requiere asignar un tipo de de dato a compartir, esto con el fin que el sistema pueda mostrar únicamente las aplicaciones capaces de manejar estos datos. Para ello se utiliza el método <code>setTipe()</code>; para este caso solo se compartirá texto plano, por lo que el paramentro será "text/plain". 
+            </p>
+
+            <p>
+                Por último se adjuntará el mensaje a compartir; esto se logra a través del mismo método putExtra(), anteriormente visto, pero en este caso se utilizará una clave genérica de Intent para identificar al valor (Intent.EXTRA_TEXT); esto con el fin de que las demás aplicaciones sepan manejar los datos que son compartidos a través de otras actividades.
+            </p>
+
+            <p>
+                Antes de iniciar el intent, se recomienda verificar que el sistema será capaz de manejar ese tipo de peticiones; esto debido a que, siendo el caso contrario el intent fallará y podrá causar problemas con el flujo de la Actividad. Para ello se implementa el último <code>if</code>, encargado de verificar la disponibiidad de aplicaciones que puedan atenter este tipo de acciones.
+            </p>
+
+            <p><u>MainActivity.java</u></p>
+
+            <pre>
+                <code class="java">
+        public class MainActivity extends AppCompatActivity {
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+            }
+        
+            @Override
+            protected void onResume() {
+                super.onResume();
+
+                Intent m_intent = new Intent();
+
+                m_intent.setAction(Intent.ACTION_SEND);
+                m_intent.setType("text/plain");
+                m_intent.putExtra(Intent.EXTRA_TEXT, "Mensaje enviado a otra actividad");
+
+                if (m_intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(m_intent);
+                }                
+            }
+        }
+                </code>
+            </pre>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/guide/components/intents-filters">Intents y filtros de intents</a>
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/reference/android/content/Intent.html">Intents</a>
+            </p>
+            
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/training/basics/intents/sending">Cómo enviar al usuario a otra app</a>
+            </p>
+
+            <p style="padding-left:1.5em;">
+                Referencia Android Developer: <a
+                    href="https://developer.android.com/training/basics/intents">Interacción con otras apps</a>
+            </p>
+
         </section>
 
         <section id="IntentImplicito">
