@@ -1,6 +1,8 @@
 :root{
     font-family: 'Raleway', sans-serif;
     
+    overflow: auto;
+
     --code-color : #2c2c54;
     --psudo-black: rgba(0,0,0,0.7);
     --down-btn: #6ab04c;
