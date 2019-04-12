@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Stylesheets references -->
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/highlight_styles/androidstudio.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <link rel="icon" href="../assets/images/icons/android.png">
+
+        <title>Laboratorio 5</title>
+    </head>
+
+    <body id="id_body">
+
+        <!-- Eductional basic information -->
+        <p class="subject">
+            Universidad Centroamericana "José Simeón Cañas".<br>
+            Programación de dispositivos móviles.<br>
+            Ciclo 01/19.
+        </p>
+
+        <!-- Front image -->
+        <header id="front-img" style="background-image: url('../assets/images/main/laboratorio4.jpg');">
+            <div class="blackManta">
+                <!-- Float menu implementation -->
+                <div class="float-menu">
+                    <div class="menu-content">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <nav class="menu-side">
+                        <div></div>
+                        <ul>
+                            <li><a href="#intro">Introducción Fragmentos.</a><i class="fas fa-code"></i></li>
+                            <li><a href="#types">Tipo de fragmentos</a><i class="fas fa-heart"></i></li>
+                            <li><a href="#cycle">Ciclo de vida</a><i class="fas fa-scroll"></i></li>
+                            <li><a href="#admin">Administración de fragmentos</a><i class="fas fa-sign-out-alt"></i>
+                            </li>
+                            <li><a href="#transaction">Transacciones de fragmentos</a><i class="fas fa-code"></i></li>
+                            <li><a href="#com-frag">Comunicación con fragmentos</a><i class="fas fa-code"></i></li>
+                            <li><a href="#com-act">Comunicación con la actividad</a><i class="fas fa-code"></i></li>
+                            <li><a href="#example">Ejemplo Práctico.</a><i class="fas fa-dumbbell"></i></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="main-front">
+                    <h1>Laboratorio 05.</h1>
+                    <h3>Viernes, 12 de abril de 2019.</h3>
+                    <div class="grid-div two-columns frontList">
+                        <!-- Two-columns item -->
+                        <div class="article-body">
+                            <h4>Temario:</h4>
+                            <ul>
+                                <li>
+                                    Conceptualización del manejo visual de listas a través de RecyclerView’s, ahondando
+                                    en su filosofía de diseño.
+                                </li>
+                                <li>
+                                    Implementación visual de la información adaptada dentro del RecyclerView a través de
+                                    CardView’s.
+                                </li>
+                                <li>
+                                    Implementación de interfaces de usuarios orientadas a el manejo de grandes
+                                    cantidades de información.
+                                </li>
+                                <li>
+                                    Métodos de manipulación de datos.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="article-body">
+                            <h4>Objetivos:</h4>
+                            <ul>
+                                <li>
+                                    Comprender la filosofía de diseño de un RecyclerView, y porqué su utilización es
+                                    importante para el manejo de grandes cantidades de información.
+                                </li>
+                                <li>
+                                    Manejar gráficamente la información de una lista haciendo uso de las clases
+                                    referentes al uso del RecyclerView.
+                                </li>
+                                <li>
+                                    Implementar interfaces de usuario amigables haciendo uso de los recursos
+                                    proporcionados por el CardView.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down" id="down-button"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <article class="content">
+            <!-- Main title -->
+            <header class="title-content" id="title-content">
+                <div id="brand">
+                    <h1>Fragmentos.</h1>
+                </div>
+            </header>
+
+            <section id="intro">
+                <p>Un Fragmento representa un comportamiento o una parte de la interfaz de usuario en una Activity.</p>
+
+                <h3>Filosofía de diseño</h3>
+
+                <p>
+                    Se debe diseñar cada fragmento como un componente modular y <strong>reutilizable</strong> de la
+                    actividad.
+                    <br><br>
+                    Se debe evitar la manipulación directa de un fragmento desde otro fragmento.
+                    <br><br>
+                    Puedes reutilizar tus fragmentos en diferentes configuraciones de diseño para optimizar la
+                    experiencia del usuario en función del espacio de pantalla disponible.
+                    <br><br>
+                    Como la pantalla de una tablet es mucho más grande que la de un teléfono, hay más espacio para
+                    combinar e intercambiar componentes de la IU.
+                </p>
+
+                <figure>
+                    <img style="width: 30em" src="../assets/images/laboratorio5/fragments1.jpeg" alt="">
+                </figure>
+
+                <p>
+                    Puedes combinar múltiples fragmentos en una sola actividad para crear una IU multipanel y volver a
+                    usar un fragmento en múltiples actividades.
+                </p>
+            </section>
+
+            <section id="types">
+                <h3>Tipos de Fragmento</h3>
+
+                <ul>
+                    <li>
+                        <p><b>Fragment estático</b>: se declara en el fichero XML de la carpeta Layout
+                            directamente. Este Fragment tendrá la cualidad de no poder ser sustituido o eliminado.</p>
+                        <figure>
+                            <img style="width: 30em" src="../assets/images/laboratorio5/fragments2.png" alt="">
+                        </figure>
+                    </li>
+                    <li>
+                        <p><b>Fragment dinámico</b>: se crea desde código Java y se asocia a un ViewGroup.
+                            Éste se podrá eliminar o sustituir por otro Fragment u otro contenido</p>
+                        <figure>
+                            <img style="width: 30em" src="../assets/images/laboratorio5/fragments3.png" alt="">
+                        </figure>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="cycle">
+                <h3>Ciclo de vida de un fragmento</h3>
+                <p>Las mismas prácticas que se aplican para la administración del ciclo de vida de una actividad también
+                    se aplican a los fragmentos. </p>
+                <figure>
+                    <img style="width: 30em" src="../assets/images/laboratorio5/fragments4.png" alt="">
+                </figure>
+                <ul>
+                    <li>
+                        <b><i>Reanudada</i></b>
+                        <br>
+                        El fragmento está visible en la actividad que se está ejecutando.
+                    </li>
+                    <li>
+                        <b><i>Pausada</i></b>
+                        <br>
+                        Otra actividad se encuentra en primer plano y tiene el foco, pero la actividad en la que reside
+                        este fragmento aún está visible.
+                    </li>
+                    <li>
+                        <b><i>Detenida</i></b>
+                        <br>
+                        El fragmento no está visible. O bien se detuvo la actividad anfitriona o se quitó el fragmento
+                        de la actividad.
+                    </li>
+                </ul>
+                <p>El ciclo de vida de la actividad, en la que reside el fragmento, afecta directamente al ciclo de vida
+                    del fragmento.</p>
+                <p>Cada callback del ciclo de vida para la actividad genera un callback similar para cada fragmento.
+                </p>
+                <p>Por ejemplo, cuando la actividad recibe <b>onPause()</b>, cada fragmento en la actividad recibe
+                    <b>onPause()</b>.
+                </p>
+                <p>Los fragmentos tienen algunos callbacks del ciclo de vida adicionales que abordan la interacción
+                    única con la actividad para poder realizar acciones como crear y destruir la IU del fragmento:
+                </p>
+                <ul>
+                    <li>
+                        <b>onAttach()</b>
+                        <br>
+                        Recibe una llamada cuando se asocia el fragmento con la actividad
+                    </li>
+                    <li>
+                        <b>onCreateView()</b>
+                        <br>
+                        Se lo llama para crear la jerarquía de vistas asociada con el fragmento.
+                    </li>
+                    <li>
+                        <b>onActivityCreated()</b>
+                        <br>
+                        Se lo llama cuando el método onCreate() de la actividad realiza un callback.
+                    </li>
+                    <li>
+                        <b>onDestroyView()</b>
+                        <br>
+                        Se lo llama cuando se quita la jerarquía de vistas asociada con el fragmento.
+                    </li>
+                    <li>
+                        <b>onDetach()</b>
+                        <br>
+                        Se lo llama cuando se desasocia el fragmento de la actividad.
+                    </li>
+                </ul>
+                <p>Solo cuando la actividad se encuentra en estado de reanudada el ciclo de vida de un fragmento puede
+                    cambiar de forma independiente:</p>
+                <figure>
+                    <img style="width: 30em" src="../assets/images/laboratorio5/fragments5.png" alt="">
+                </figure>
+                <p>Cuando la actividad sale del estado de reanudada hace que el fragmento vuelva a atravesar su ciclo de
+                    vida.</p>
+            </section>
+
+            <section id="admin">
+                <h3>Administración de un fragmento</h3>
+                <p>
+                    Para administrar los fragmentos de tu actividad, debes usar <code>FragmentManager</code>. Esta
+                    actividad tiene
+                    una instancia de <code>FragmentManager</code> que va a buscar o cambiar dinámicamente sus
+                    fragmentos. Para
+                    obtenerlo, llama a <code>getFragmentManager()</code> desde tu actividad.
+                </p>
+                <p>Algunas de las cosas que puedes hacer con <code>FragmentManager</code> incluyen:</p>
+                <ul>
+                    <li>
+                        <p>
+                            Obtener fragmentos que ya existen en la actividad con <code>findFragmentById()</code> (para
+                            fragmentos que
+                            proporcionan una IU en el diseño de la actividad) o <code>findFragmentByTag()</code> (para
+                            fragmentos con
+                            o sin IU).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Activar fragmentos de la pila de retroceso con <code>popBackStack()</code> (simulando el uso
+                            del comando
+                            Atrás por parte del usuario).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Registrar un receptor para cambios realizados en la pila de retroceso con
+                            <code>addOnBackStackChangedListener()</code>.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Si necesitas un objeto Context en tu Fragment, puedes llamar a <code>getActivity()</code>. Pero
+                    asegúrate de
+                    llamar a <code>getActivity()</code> solo cuando el fragmento esté anexado a una actividad. Cuando el
+                    fragmento
+                    aún no se haya anexado, o se haya separado durante el final de su ciclo de vida,
+                    <code>getActivity()</code>
+                    devolverá nulo.
+                </p>
+            </section>
+
+            <section id="transaction">
+                <h3>Transacciones de fragmentos</h3>
+                <p>
+                    Las transacciones son el conjunto de cambios que confirmas en la actividad como agregar, quitar o
+                    reemplazar fragmentos, que se desean realizar al mismo tiempo. Puedes configurar todos los cambios
+                    que desees realizar en una transacción determinada con métodos como <code>add()</code>,
+                    <code>remove()</code> y <code>replace()</code>.
+                    Luego, para aplicar la transacción a la actividad, debes llamar a <code>commit()</code>.
+                </p>
+                <p>
+                    Sin embargo, antes de llamar a <code>commit()</code> probablemente te convenga llamar a
+                    <code>addToBackStack()</code> para
+                    agregar la transacción a una pila de retroceso de transacciones de fragmentos. Esta pila de
+                    actividades está administrada por la actividad y le permite al usuario volver a un estado anterior
+                    del fragmento presionando el botón <i>Atrás</i>.
+                </p>
+                <p>
+                    No importa el orden en que agregues cambios a una <code>FragmentTransaction</code>, excepto por lo
+                    siguiente:
+                </p>
+                <ul>
+                    <li>
+                        <p>Debes llamar en último lugar a <code>commit()</code>.</p>
+                    </li>
+                    <li>
+                        <p>Si estás agregando múltiples fragmentos al mismo contenedor, el orden en el que los agregas
+                            determina el orden en el que aparecen en la jerarquía de vistas.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Si no llamas a <code>addToBackStack()</code>, cuando realices una transacción que quite un
+                    fragmento, ese
+                    fragmento se destruirá cuando se confirme la transacción y el usuario no podrá regresar a él. Pero
+                    si llamas a <code>addToBackStack()</code>, cuando se elimine un fragmento, el fragmento se detendrá
+                    y se
+                    reanudará si el usuario retrocede en la navegación.
+                </p>
+            </section>
+
+            <section id="com-frag">
+                <h3>Comunicación con fragmentos</h3>
+                <p>El <code>FragmentManager</code> sabe acerca de todos los fragmentos que están conectados a una
+                    actividad y
+                    proporciona dos métodos para ayudar a encontrar estos fragmentos:
+                </p>
+                <ul>
+                    <li>
+                        <p>FindFragmentById – este método encontrará un fragmento con el identificador que se especificó
+                            en el archivo de diseño o el identificador del contenedor cuando se agregó el fragmento como
+                            parte de una transacción.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            FindFragmentByTag – este método se utiliza para buscar un fragmento que tiene una etiqueta
+                            que se proporcionó en el archivo de diseño o que se ha agregado en una transacción.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="com-act">
+                <h3>Comunicación con la actividad</h3>
+                <p>Si bien un <code>Fragment</code> se implementa como un objeto dependiente de una Activity y puede
+                    usarse dentro de
+                    múltiples actividades, una instancia determinada de un fragmento está directamente vinculada a la
+                    actividad que la contiene.</p>
+                <p>
+                    Específicamente, el fragmento puede acceder a la instancia <code>Activity</code> con
+                    <code>getActivity()</code> y realizar
+                    tareas de manera sencilla, como buscar una vista en el diseño de la actividad.
+                </p>
+            </section>
+
+            <section id="example">
+                <h3>Ejemplo práctico.</h3>
+
+                <p>
+                    El siguiente ejemplo consistirá en realizar un catálogo de películas. Este será alimentado por la
+                    API <a href="http://www.omdbapi.com/">OMDB</a>, la cual se necesita un registro para poder hacer uso
+                    de ella (Registro: <a href="http://www.omdbapi.com/apikey.aspx">enlace aquí</a> ).
+                </p>
+
+                <p>
+                    La aplicación contendrá una barra buscadora, que consumirá la API de tal forma que el nombre de la
+                    película que se ingrese, en caso de existir, esta se agregue con la información general en el
+                    RecyclerView; caso contrario muestre un error en pantalla.
+                </p>
+
+                <p>
+                    Además se podrá dar click a una película en específico, y ver un detalle de la misma en otra
+                    pantalla de la aplicación.
+                </p>
+
+                <h4><em>Resultado esperado.</em></h4>
+
+                <div class="grid-div three-columns">
+                    <figure>
+                        <img src="../assets/images/laboratorio4/Laboratorio4_1.png" alt="">
+                    </figure>
+                    <figure>
+                        <img src="../assets/images/laboratorio4/Laboratorio4_3.png" alt="">
+                    </figure>
+                    <figure>
+                        <img src="../assets/images/laboratorio4/Laboratorio4_2.png" alt="">
+                    </figure>
+                </div>
+
+                <h4><em>Código fuente del resultado.</em></h4>
+
+                <p>
+                    Solución en Kotlin: <a href="https://github.com/DouglasHdezT/Laboratorio4">Laboratorio 4 Kotlin</a>
+                </p>
+
+                <p>
+                    Solución en Java: <a href="https://github.com/petrlr14/Laboratorio4-java">Laboratorio 4 Java</a>
+                </p>
+            </section>
+
+            <section>
+                <h3>Anexos.</h3>
+
+                <div class="tip">
+
+                    <h3>Manejo de Null Safety en Kotlin: <a
+                            href="https://kotlinlang.org/docs/reference/null-safety.html#null-safety">Null Safety</a>
+                    </h3>
+
+                </div>
+
+                <h4><em>Recusos a utilizar en la aplicación</em></h4>
+
+                <p><em><u>activity_main.xml</u></em></p>
+
+                <pre>
+                <code class="xml">
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        &lt;LinearLayout
+            android:id=&quot;@+id/main_ll&quot;
+            xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+            xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+            xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:gravity=&quot;center&quot;
+            android:orientation=&quot;vertical&quot;
+            tools:context=&quot;.activities.MainActivity&quot;&gt;
+        
+            &lt;LinearLayout
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;0dp&quot;
+                android:layout_weight=&quot;1&quot;
+                android:gravity=&quot;center&quot;
+                android:orientation=&quot;horizontal&quot;&gt;
+        
+                &lt;EditText
+                    android:id=&quot;@+id/movie_name_et&quot;
+                    android:layout_width=&quot;0dp&quot;
+                    android:hint=&quot;@string/movie_name_string&quot;
+                    android:layout_height=&quot;wrap_content&quot;
+                    android:layout_weight=&quot;3&quot; /&gt;
+        
+                &lt;Button
+                    android:id=&quot;@+id/add_movie_btn&quot;
+                    android:layout_width=&quot;0dp&quot;
+                    android:layout_height=&quot;wrap_content&quot;
+                    android:layout_weight=&quot;1&quot;
+                    android:text=&quot;Add&quot;
+                    /&gt;
+        
+            &lt;/LinearLayout&gt;
+        
+            &lt;android.support.v7.widget.RecyclerView
+                android:id=&quot;@+id/movie_list_rv&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;0dp&quot;
+                android:layout_weight=&quot;8&quot; /&gt;
+        
+        &lt;/LinearLayout&gt;
+                </code>
+            </pre>
+
+                <p><em><u>cardview_movie.xml</u></em></p>
+
+                <pre>
+                <code class="xml">
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        &lt;android.support.v7.widget.CardView xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+            xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_margin=&quot;8dp&quot;
+            app:cardCornerRadius=&quot;5dp&quot;
+            app:cardElevation=&quot;10dp&quot;&gt;
+        
+            &lt;RelativeLayout
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;&gt;
+        
+                &lt;ImageView
+                    android:id=&quot;@+id/movie_image_cv&quot;
+                    android:layout_width=&quot;match_parent&quot;
+                    android:layout_height=&quot;150dp&quot;
+                    android:scaleType=&quot;centerCrop&quot;
+                    android:src=&quot;@drawable/ic_launcher_background&quot; /&gt;
+        
+                &lt;TextView
+                    android:id=&quot;@+id/movie_title_cv&quot;
+                    android:layout_width=&quot;wrap_content&quot;
+                    android:layout_height=&quot;wrap_content&quot;
+                    android:layout_alignEnd=&quot;@id/movie_image_cv&quot;
+                    android:layout_alignRight=&quot;@id/movie_image_cv&quot;
+                    android:layout_alignBottom=&quot;@id/movie_image_cv&quot;
+                    android:layout_margin=&quot;16dp&quot;
+        
+                    android:background=&quot;#65000000&quot;
+                    android:gravity=&quot;end&quot;
+        
+                    android:lines=&quot;1&quot;
+                    android:padding=&quot;8dp&quot;
+        
+                    android:text=&quot;@string/movie_title_string&quot;
+                    android:textColor=&quot;#fff&quot;
+                    android:textSize=&quot;25sp&quot; /&gt;
+        
+                &lt;TextView
+                    android:id=&quot;@+id/movie_rate_cv&quot;
+                    android:layout_width=&quot;wrap_content&quot;
+                    android:layout_height=&quot;wrap_content&quot;
+                    android:layout_alignStart=&quot;@id/movie_image_cv&quot;
+                    android:layout_alignLeft=&quot;@id/movie_image_cv&quot;
+                    android:layout_alignTop=&quot;@id/movie_image_cv&quot;
+        
+                    android:layout_margin=&quot;16dp&quot;
+                    android:background=&quot;#65000000&quot;
+        
+                    android:gravity=&quot;end&quot;
+                    android:padding=&quot;8dp&quot;
+        
+                    android:text=&quot;@string/rate_ex_string&quot;
+                    android:textColor=&quot;#fff&quot;
+        
+                    android:textSize=&quot;25sp&quot; /&gt;
+        
+                &lt;LinearLayout
+                    android:id=&quot;@+id/data_container_ll_cv&quot;
+                    android:layout_width=&quot;match_parent&quot;
+                    android:layout_height=&quot;wrap_content&quot;
+                    android:layout_below=&quot;@id/movie_image_cv&quot;
+        
+                    android:orientation=&quot;vertical&quot;&gt;
+        
+                    &lt;TextView
+                        android:id=&quot;@+id/movie_plot_cv&quot;
+                        android:layout_width=&quot;match_parent&quot;
+                        android:layout_height=&quot;wrap_content&quot;
+                        android:layout_margin=&quot;8dp&quot;
+                        android:ellipsize=&quot;end&quot;
+                        android:lines=&quot;3&quot;
+                        android:text=&quot;@string/lorem_30_string&quot; /&gt;
+        
+                    &lt;TextView
+                        android:id=&quot;@+id/movie_runtime_cv&quot;
+                        android:layout_width=&quot;match_parent&quot;
+                        android:layout_height=&quot;wrap_content&quot;
+                        android:layout_margin=&quot;8dp&quot;
+                        android:gravity=&quot;end&quot;
+                        android:text=&quot;@string/runtime_ex_string&quot; /&gt;
+        
+                &lt;/LinearLayout&gt;
+        
+            &lt;/RelativeLayout&gt;
+        
+        &lt;/android.support.v7.widget.CardView&gt;
+                </code>
+            </pre>
+
+                <p><em><u>viewer_movie.xml</u></em></p>
+
+                <pre>
+                <code class="xml">
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        &lt;android.support.design.widget.CoordinatorLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+            xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+            xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            tools:context=&quot;.activities.MovieViewerActivity&quot;&gt;
+        
+            &lt;android.support.design.widget.AppBarLayout
+                android:id=&quot;@+id/appbarviewer&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;256dp&quot;
+                android:fitsSystemWindows=&quot;true&quot;&gt;
+        
+                &lt;android.support.design.widget.CollapsingToolbarLayout
+                    android:id=&quot;@+id/collapsingtoolbarviewer&quot;
+                    android:layout_width=&quot;match_parent&quot;
+                    android:layout_height=&quot;match_parent&quot;
+                    android:fitsSystemWindows=&quot;true&quot;
+                    app:collapsedTitleTextAppearance=&quot;@style/CollapsedAppBar&quot;
+                    app:contentScrim=&quot;?attr/colorPrimaryDark&quot;
+                    app:expandedTitleTextAppearance=&quot;@style/ExpandedAppBar&quot;
+                    app:layout_scrollFlags=&quot;scroll|exitUntilCollapsed&quot;
+                    app:layout_scrollInterpolator=&quot;@android:anim/decelerate_interpolator&quot;
+                    app:title=&quot;@string/n_a_value&quot;
+                    app:toolbarId=&quot;@id/toolbarviewer&quot;&gt;
+        
+                    &lt;ImageView
+                        android:id=&quot;@+id/app_bar_image_viewer&quot;
+                        android:layout_width=&quot;match_parent&quot;
+                        android:layout_height=&quot;match_parent&quot;
+                        android:scaleType=&quot;centerCrop&quot;
+                        app:layout_collapseMode=&quot;parallax&quot; /&gt;
+        
+                    &lt;TextView
+                        android:id=&quot;@+id/app_bar_rating_viewer&quot;
+                        android:layout_width=&quot;wrap_content&quot;
+                        android:layout_height=&quot;wrap_content&quot;
+                        android:layout_gravity=&quot;end&quot;
+                        android:layout_marginTop=&quot;16dp&quot;
+                        android:layout_marginEnd=&quot;16dp&quot;
+                        android:layout_marginRight=&quot;16dp&quot;
+                        android:background=&quot;#65000000&quot;
+                        android:padding=&quot;8dp&quot;
+                        android:text=&quot;@string/n_a_value&quot;
+                        android:textColor=&quot;#fff&quot;
+                        android:textSize=&quot;25sp&quot; /&gt;
+        
+                    &lt;android.support.v7.widget.Toolbar
+                        android:id=&quot;@+id/toolbarviewer&quot;
+                        android:layout_width=&quot;match_parent&quot;
+                        android:layout_height=&quot;?attr/actionBarSize&quot; /&gt;
+                &lt;/android.support.design.widget.CollapsingToolbarLayout&gt;
+            &lt;/android.support.design.widget.AppBarLayout&gt;
+        
+            &lt;android.support.v4.widget.NestedScrollView
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;
+                app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
+        
+                &lt;android.support.constraint.ConstraintLayout
+                    android:layout_width=&quot;match_parent&quot;
+                    android:layout_height=&quot;wrap_content&quot;&gt;
+        
+                    &lt;TextView
+                            android:id=&quot;@+id/plot_viewer&quot;
+                            android:layout_width=&quot;0dp&quot;
+                            android:layout_height=&quot;wrap_content&quot;
+                            android:layout_marginStart=&quot;16dp&quot;
+                            android:layout_marginLeft=&quot;16dp&quot;
+                            android:layout_marginEnd=&quot;16dp&quot;
+                            android:layout_marginRight=&quot;16dp&quot;
+                            android:fontFamily=&quot;@font/roboto_medium&quot;
+                            android:text=&quot;@string/n_a_value&quot;
+                            app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+                            app:layout_constraintStart_toStartOf=&quot;parent&quot;
+                            app:layout_constraintTop_toBottomOf=&quot;@+id/genre_viewer&quot; android:layout_marginTop=&quot;16dp&quot;
+                    android:justificationMode=&quot;inter_word&quot;/&gt;
+        
+                    &lt;TextView
+                        android:id=&quot;@+id/textView&quot;
+                        android:layout_width=&quot;wrap_content&quot;
+                        android:layout_height=&quot;wrap_content&quot;
+                        android:layout_marginStart=&quot;16dp&quot;
+                        android:layout_marginLeft=&quot;16dp&quot;
+                        android:layout_marginTop=&quot;16dp&quot;
+                        android:fontFamily=&quot;@font/roboto_medium&quot;
+                        android:text=&quot;Director:&quot;
+                        android:textStyle=&quot;bold&quot;
+                        app:layout_constraintStart_toStartOf=&quot;parent&quot;
+                        app:layout_constraintTop_toBottomOf=&quot;@+id/plot_viewer&quot; /&gt;
+        
+                    &lt;TextView
+                            android:id=&quot;@+id/director_viewer&quot;
+                            android:layout_width=&quot;wrap_content&quot;
+                            android:layout_height=&quot;wrap_content&quot;
+                            android:layout_marginStart=&quot;16dp&quot;
+                            android:layout_marginLeft=&quot;16dp&quot;
+                            android:fontFamily=&quot;@font/roboto_light&quot;
+                            android:text=&quot;@string/n_a_value&quot;
+                            app:layout_constraintStart_toEndOf=&quot;@+id/textView&quot;
+                            app:layout_constraintTop_toTopOf=&quot;@+id/textView&quot;/&gt;
+        
+                    &lt;TextView
+                        android:id=&quot;@+id/TextView4&quot;
+                        android:layout_width=&quot;wrap_content&quot;
+                        android:layout_height=&quot;wrap_content&quot;
+                        android:layout_marginStart=&quot;16dp&quot;
+                        android:layout_marginLeft=&quot;16dp&quot;
+                        android:layout_marginTop=&quot;16dp&quot;
+                        android:fontFamily=&quot;@font/roboto_medium&quot;
+                        android:text=&quot;Actors:&quot;
+                        android:textStyle=&quot;bold&quot;
+                        app:layout_constraintStart_toStartOf=&quot;parent&quot;
+                        app:layout_constraintTop_toBottomOf=&quot;@+id/textView&quot; /&gt;
+        
+                    &lt;TextView
+                            android:id=&quot;@+id/actors_viewer&quot;
+                            android:layout_width=&quot;0dp&quot;
+                            android:layout_height=&quot;wrap_content&quot;
+                            android:layout_marginStart=&quot;16dp&quot;
+                            android:layout_marginLeft=&quot;16dp&quot;
+                            android:layout_marginEnd=&quot;16dp&quot;
+                            android:layout_marginRight=&quot;16dp&quot;
+                            android:fontFamily=&quot;@font/roboto_light&quot;
+                            android:text=&quot;@string/n_a_value&quot;
+                            app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+                            app:layout_constraintStart_toEndOf=&quot;@+id/TextView4&quot;
+                            app:layout_constraintTop_toTopOf=&quot;@+id/TextView4&quot;/&gt;
+                    &lt;TextView
+                            android:text=&quot;@string/n_a_value&quot;
+                            android:layout_width=&quot;wrap_content&quot;
+                            android:layout_height=&quot;wrap_content&quot;
+                            android:id=&quot;@+id/genre_viewer&quot; android:layout_marginTop=&quot;16dp&quot;
+                            app:layout_constraintTop_toTopOf=&quot;parent&quot; app:layout_constraintStart_toStartOf=&quot;parent&quot;
+                            android:layout_marginLeft=&quot;16dp&quot; android:layout_marginStart=&quot;16dp&quot;
+                            android:fontFamily=&quot;@font/roboto_light&quot;/&gt;
+                    &lt;TextView
+                            android:text=&quot;@string/n_a_value&quot;
+                            android:layout_width=&quot;wrap_content&quot;
+                            android:layout_height=&quot;wrap_content&quot;
+                            android:id=&quot;@+id/released_viewer&quot;
+                            app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+                            android:layout_marginEnd=&quot;16dp&quot; android:layout_marginRight=&quot;16dp&quot;
+                            app:layout_constraintTop_toTopOf=&quot;@+id/genre_viewer&quot; android:fontFamily=&quot;@font/roboto_light&quot;/&gt;
+                &lt;/android.support.constraint.ConstraintLayout&gt;
+            &lt;/android.support.v4.widget.NestedScrollView&gt;
+        &lt;/android.support.design.widget.CoordinatorLayout&gt;
+                </code>
+            </pre>
+            </section>
+
+        </article>
+
+        <!-- Footer Implementation -->
+        <footer>
+            <article>
+                <p><em>
+                        “En cuestiones de cultura y de saber, sólo se pierde lo que se guarda; sólo se gana lo que se
+                        da.”
+                    </em></p>
+
+                <p id="author">
+                    Antonio Machado.
+                </p>
+            </article>
+        </footer>
+
+        <!-- Home Button -->
+        <span id="HomeBtn"><i class="fas fa-chevron-up"></i></span>
+    </body>
+
+    <!-- JS scripts area -->
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="../assets/js/javaScript.js"></script>
+    <script src="../assets/js/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        sideMenuControl();
+        homeBtnControl();
+    </script>
+
+</html>
