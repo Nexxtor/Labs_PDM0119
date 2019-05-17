@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Stylesheets references -->
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/highlight_styles/androidstudio.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <link rel="icon" href="../assets/images/icons/android.png">
+
+        <title>Laboratorio 5</title>
+    </head>
+
+    <body id="id_body">
+
+        <!-- Eductional basic information -->
+        <p class="subject">
+            Universidad Centroamericana "José Simeón Cañas".<br>
+            Programación de dispositivos móviles.<br>
+            Ciclo 01/19.
+        </p>
+
+        <!-- Front image -->
+        <header id="front-img" style="background-image: url('../assets/images/main/laboratorio5.jpg');">
+            <div class="blackManta">
+                <!-- Float menu implementation -->
+                <div class="float-menu">
+                    <div class="menu-content">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <nav class="menu-side">
+                        <div></div>
+                        <ul>
+                            <li><a href="#intro">Introducción Fragmentos.</a><i class="fas fa-code"></i></li>
+                            <li><a href="#types">Tipo de fragmentos</a><i class="fas fa-heart"></i></li>
+                            <li><a href="#cycle">Ciclo de vida</a><i class="fas fa-scroll"></i></li>
+                            <li><a href="#admin">Administración de fragmentos</a><i class="fas fa-sign-out-alt"></i></li>
+                            <li><a href="#transaction">Transacciones de fragmentos</a><i class="fas fa-code"></i></li>
+                            <li><a href="#com-frag">Comunicación con fragmentos</a><i class="fas fa-code"></i></li>
+                            <li><a href="#com-act">Comunicación con la actividad</a><i class="fas fa-code"></i></li>
+                            <li><a href="#example">Ejemplo Práctico.</a><i class="fas fa-dumbbell"></i></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="main-front">
+                    <h1>Laboratorio 05.</h1>
+                    <h3>Viernes, 12 de abril de 2019.</h3>
+                    <div class="grid-div two-columns frontList">
+                        <!-- Two-columns item -->
+                        <div class="article-body">
+
+                            <h4>Temario:</h4>
+                            <ul>
+                                <li>
+                                    Conceptualización básica de los fragmentos, y su diferencia con las actividades.
+                                </li>
+                                <li>
+                                    Introducción a la filosofía de diseño asociada con el uso de fragmentos.
+                                </li>
+                                <li>
+                                    Uso de fragmentos estáticos y dinámicos; y sus principales diferencias.
+                                </li>
+                                <li>
+                                    Ciclo de vida de un fragmento.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="article-body">
+                            <h4>Objetivos:</h4>
+                            <ul>
+                                <li>
+                                        Comprender la filosofía de diseño detrás de un fragmento, así como la diferencia entre el uso de fragmentos estáticos o dinámicos en una interfaz de usuario.
+                                </li>
+                                <li>
+                                        Implementar fragmentos que se adapten a la filosofía antes planteada,  que muestren gráficamente información previamente procesada por otros recursos de la aplicación.
+                                </li>
+                                <li>
+                                        Hacer uso de recursos utilizados previamente vistos en otros laboratorios para, en conjunto con los fragmentos, generé una interfaz de usuario que se adapte a los estándares de diseño de Android.
+                                </li>
+                                <li>
+                                        Comprender el ciclo de vida de un fragmento, y como este se complementa y enlaza con el ciclo de la actividad padre.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down" id="down-button"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <article class="content">
+            <!-- Main title -->
+            <header class="title-content" id="title-content">
+                <div id="brand">
+                    <h1>Fragmentos</h1>
+                    <div id="content-brand">
+                        <h5>Diseños dinámicos.</h5>
+                    </div>
+                </div>
+            </header>
+
+            <section id="intro">
+                <p> <em>Definición:</em> Un Fragmento representa un comportamiento o una parte de la interfaz de usuario en una Activity.</p>
+
+                <h3>Filosofía de diseño</h3>
+
+                <p>
+                    Se debe diseñar cada fragmento como un componente modular y <strong>reutilizable</strong> de la
+                    actividad.
+                    <br><br>
+                    Se debe evitar la manipulación directa de un fragmento desde otro fragmento.
+                    <br><br>
+                    Puedes reutilizar tus fragmentos en diferentes configuraciones de diseño para optimizar la
+                    experiencia del usuario en función del espacio de pantalla disponible.
+                    <br><br>
+                    Como la pantalla de una tablet es mucho más grande que la de un teléfono, hay más espacio para
+                    combinar e intercambiar componentes de la IU.
+                </p>
+
+                <figure>
+                    <img style="width: 30em" src="../assets/images/laboratorio5/fragments1.jpeg" alt="">
+                </figure>
+
+                <p>
+                    Puedes combinar múltiples fragmentos en una sola actividad para crear una IU multipanel y volver a
+                    usar un fragmento en múltiples actividades.
+                </p>
+            </section>
+
+            <section id="types">
+                <h3>Tipos de Fragmento</h3>
+
+                <ul>
+                    <li>
+                        <p><b>Fragment estático</b>: se declara en el fichero XML de la carpeta Layout
+                            directamente. Este Fragment tendrá la cualidad de no poder ser sustituido o eliminado.</p>
+                        <figure>
+                            <img style="width: 20em" src="../assets/images/laboratorio5/fragments2.png" alt="">
+                        </figure>
+                    </li>
+                    <li>
+                        <p><b>Fragment dinámico</b>: se crea desde código Java y se asocia a un ViewGroup.
+                            Éste se podrá eliminar o sustituir por otro Fragment u otro contenido</p>
+                        <figure>
+                            <img style="width: 20em" src="../assets/images/laboratorio5/fragments3.png" alt="">
+                        </figure>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="cycle">
+                <h3>Ciclo de vida de un fragmento</h3>
+                <p>Las mismas prácticas que se aplican para la administración del ciclo de vida de una actividad también
+                    se aplican a los fragmentos. </p>
+                <figure>
+                    <img style="width: 20em" src="../assets/images/laboratorio5/fragments4.png" alt="">
+                </figure>
+                <ul>
+                    <li>
+                        <b><i>Reanudada</i></b>
+                        <br>
+                        El fragmento está visible en la actividad que se está ejecutando.
+                    </li>
+                    <li>
+                        <b><i>Pausada</i></b>
+                        <br>
+                        Otra actividad se encuentra en primer plano y tiene el foco, pero la actividad en la que reside
+                        este fragmento aún está visible.
+                    </li>
+                    <li>
+                        <b><i>Detenida</i></b>
+                        <br>
+                        El fragmento no está visible. O bien se detuvo la actividad anfitriona o se quitó el fragmento
+                        de la actividad.
+                    </li>
+                </ul>
+                <p>El ciclo de vida de la actividad, en la que reside el fragmento, afecta directamente al ciclo de vida
+                    del fragmento.</p>
+                <p>Cada callback del ciclo de vida para la actividad genera un callback similar para cada fragmento.
+                </p>
+                <p>Por ejemplo, cuando la actividad recibe <b>onPause()</b>, cada fragmento en la actividad recibe
+                    <b>onPause()</b>.
+                </p>
+                <p>Los fragmentos tienen algunos callbacks del ciclo de vida adicionales que abordan la interacción
+                    única con la actividad para poder realizar acciones como crear y destruir la IU del fragmento:
+                </p>
+                <ul>
+                    <li>
+                        <b>onAttach()</b>
+                        <br>
+                        Recibe una llamada cuando se asocia el fragmento con la actividad
+                    </li>
+                    <li>
+                        <b>onCreateView()</b>
+                        <br>
+                        Se lo llama para crear la jerarquía de vistas asociada con el fragmento.
+                    </li>
+                    <li>
+                        <b>onActivityCreated()</b>
+                        <br>
+                        Se lo llama cuando el método onCreate() de la actividad realiza un callback.
+                    </li>
+                    <li>
+                        <b>onDestroyView()</b>
+                        <br>
+                        Se lo llama cuando se quita la jerarquía de vistas asociada con el fragmento.
+                    </li>
+                    <li>
+                        <b>onDetach()</b>
+                        <br>
+                        Se lo llama cuando se desasocia el fragmento de la actividad.
+                    </li>
+                </ul>
+                <p>Solo cuando la actividad se encuentra en estado de reanudada el ciclo de vida de un fragmento puede
+                    cambiar de forma independiente:</p>
+                <figure>
+                    <img style="width: 20em" src="../assets/images/laboratorio5/fragments5.png" alt="">
+                </figure>
+                <p>Cuando la actividad sale del estado de reanudada hace que el fragmento vuelva a atravesar su ciclo de
+                    vida.</p>
+            </section>
+
+            <section id="admin">
+                <h3>Administración de un fragmento</h3>
+                <p>
+                    Para administrar los fragmentos de tu actividad, debes usar <code>FragmentManager</code>. Esta
+                    actividad tiene
+                    una instancia de <code>FragmentManager</code> que va a buscar o cambiar dinámicamente sus
+                    fragmentos. Para
+                    obtenerlo, llama a <code>getFragmentManager()</code> desde tu actividad.
+                </p>
+                <p>Algunas de las cosas que puedes hacer con <code>FragmentManager</code> incluyen:</p>
+                <ul>
+                    <li>
+                        <p>
+                            Obtener fragmentos que ya existen en la actividad con <code>findFragmentById()</code> (para
+                            fragmentos que
+                            proporcionan una IU en el diseño de la actividad) o <code>findFragmentByTag()</code> (para
+                            fragmentos con
+                            o sin IU).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Activar fragmentos de la pila de retroceso con <code>popBackStack()</code> (simulando el uso
+                            del comando
+                            Atrás por parte del usuario).
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Registrar un receptor para cambios realizados en la pila de retroceso con
+                            <code>addOnBackStackChangedListener()</code>.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Si necesitas un objeto Context en tu Fragment, puedes llamar a <code>getActivity()</code>. Pero
+                    asegúrate de
+                    llamar a <code>getActivity()</code> solo cuando el fragmento esté anexado a una actividad. Cuando el
+                    fragmento
+                    aún no se haya anexado, o se haya separado durante el final de su ciclo de vida,
+                    <code>getActivity()</code>
+                    devolverá nulo.
+                </p>
+            </section>
+
+            <section id="transaction">
+                <h3>Transacciones de fragmentos</h3>
+                <p>
+                    Las transacciones son el conjunto de cambios que confirmas en la actividad como agregar, quitar o
+                    reemplazar fragmentos, que se desean realizar al mismo tiempo. Puedes configurar todos los cambios
+                    que desees realizar en una transacción determinada con métodos como <code>add()</code>,
+                    <code>remove()</code> y <code>replace()</code>.
+                    Luego, para aplicar la transacción a la actividad, debes llamar a <code>commit()</code>.
+                </p>
+                <p>
+                    Sin embargo, antes de llamar a <code>commit()</code> probablemente te convenga llamar a
+                    <code>addToBackStack()</code> para
+                    agregar la transacción a una pila de retroceso de transacciones de fragmentos. Esta pila de
+                    actividades está administrada por la actividad y le permite al usuario volver a un estado anterior
+                    del fragmento presionando el botón <i>Atrás</i>.
+                </p>
+                <p>
+                    No importa el orden en que agregues cambios a una <code>FragmentTransaction</code>, excepto por lo
+                    siguiente:
+                </p>
+                <ul>
+                    <li>
+                        <p>Debes llamar en último lugar a <code>commit()</code>.</p>
+                    </li>
+                    <li>
+                        <p>Si estás agregando múltiples fragmentos al mismo contenedor, el orden en el que los agregas
+                            determina el orden en el que aparecen en la jerarquía de vistas.
+                        </p>
+                    </li>
+                </ul>
+                <p>
+                    Si no llamas a <code>addToBackStack()</code>, cuando realices una transacción que quite un
+                    fragmento, ese
+                    fragmento se destruirá cuando se confirme la transacción y el usuario no podrá regresar a él. Pero
+                    si llamas a <code>addToBackStack()</code>, cuando se elimine un fragmento, el fragmento se detendrá
+                    y se
+                    reanudará si el usuario retrocede en la navegación.
+                </p>
+            </section>
+
+            <section id="com-frag">
+                <h3>Comunicación con fragmentos</h3>
+                <p>El <code>FragmentManager</code> sabe acerca de todos los fragmentos que están conectados a una
+                    actividad y
+                    proporciona dos métodos para ayudar a encontrar estos fragmentos:
+                </p>
+                <ul>
+                    <li>
+                        <p>FindFragmentById – este método encontrará un fragmento con el identificador que se especificó
+                            en el archivo de diseño o el identificador del contenedor cuando se agregó el fragmento como
+                            parte de una transacción.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            FindFragmentByTag – este método se utiliza para buscar un fragmento que tiene una etiqueta
+                            que se proporcionó en el archivo de diseño o que se ha agregado en una transacción.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="com-act">
+                <h3>Comunicación con la actividad</h3>
+                <p>Si bien un <code>Fragment</code> se implementa como un objeto dependiente de una Activity y puede
+                    usarse dentro de
+                    múltiples actividades, una instancia determinada de un fragmento está directamente vinculada a la
+                    actividad que la contiene.</p>
+                <p>
+                    Específicamente, el fragmento puede acceder a la instancia <code>Activity</code> con
+                    <code>getActivity()</code> y realizar
+                    tareas de manera sencilla, como buscar una vista en el diseño de la actividad.
+                </p>
+            </section>
+
+            <section id="example">
+                <h3>Ejemplo práctico.</h3>
+
+                <p>
+                    Para este ejercicio nos basaremos en el ejemplo de laboratorio 4 (RecyclerView), pero añadiendole algunas funcionalidades extra.
+                </p>
+
+                <h4><u>Definición del ejemplo del laboratorio 4.</u></h4>
+
+                <p>
+                    El siguiente ejemplo consistirá en realizar un catálogo de películas. Este será alimentado por la
+                    API <a href="http://www.omdbapi.com/">OMDB</a>, la cual se necesita un registro para poder hacer uso
+                    de ella (Registro: <a href="http://www.omdbapi.com/apikey.aspx">enlace aquí</a> ).
+                </p>
+
+                <p>
+                    La aplicación contendrá una barra buscadora, que consumirá la API de tal forma que el nombre de la
+                    película que se ingrese, en caso de existir, esta se agregue con la información general en el
+                    RecyclerView; caso contrario muestre un error en pantalla.
+                </p>
+
+                <p>
+                    Además se podrá dar click a una película en específico, y ver un detalle de la misma en otra
+                    pantalla de la aplicación.
+                </p>
+
+                <h4><u>Funcionalidad extra.</u></h4>
+
+                <p>
+                    En este caso se deberá implementar la compatibilidad con la vista "Landscape", adaptándolo al patrón de diseño con fragmentos. La UI deberá contener una lista lateral que contenga la colección de datos, y un panel general que muestre la información específica de un elemento de la vista. 
+                </p>
+
+                <h4><em>Resultado esperado.</em></h4>
+
+                <div class="grid-div three-columns">
+                    <figure>
+                        <img src="../assets/images/laboratorio4/Laboratorio4_1.png" alt="">
+                    </figure>
+                    <figure>
+                        <img src="../assets/images/laboratorio4/Laboratorio4_3.png" alt="">
+                    </figure>
+                    <figure>
+                        <img src="../assets/images/laboratorio4/Laboratorio4_2.png" alt="">
+                    </figure>
+                </div>
+
+                <h4><em>Código fuente del resultado.</em></h4>
+
+                <p>
+                    Solución en Kotlin: <a href="https://github.com/DouglasHdezT/MovieDex">Laboratorio 5 Kotlin</a>
+                </p>
+
+                <h3>Tarea.</h3>
+
+                <p>
+                    A partir del código implementado en el laboratorio, y la tarea de la pokedex asignada anteriormente, reestructurar este último de tal forma que cumpla los mismos requisitos del MovieDex (aplicación de fragmentos, implmentación de Landscape, etc). La fecha límite para realizar el último commit será 4 días hábiles despues del laboratorio. <em><strong>Subir el link del repositorio en antes de la hora final del laboratorio.</strong></em>
+                </p>
+            </section>
+            
+        </article>
+
+        <!-- Footer Implementation -->
+        <footer>
+            <article>
+                <p><em>
+                        “En cuestiones de cultura y de saber, sólo se pierde lo que se guarda; sólo se gana lo que se
+                        da.”
+                    </em></p>
+
+                <p id="author">
+                    Antonio Machado.
+                </p>
+            </article>
+        </footer>
+
+        <!-- Home Button -->
+        <span id="HomeBtn"><i class="fas fa-chevron-up"></i></span>
+    </body>
+
+    <!-- JS scripts area -->
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="../assets/js/javaScript.js"></script>
+    <script src="../assets/js/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        sideMenuControl();
+        homeBtnControl();
+    </script>
+
+</html>

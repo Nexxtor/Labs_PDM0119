@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Stylesheets references -->
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/highlight_styles/androidstudio.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <link rel="icon" href="../assets/images/icons/android.png">
+
+        <title>Laboratorio 5</title>
+    </head>
+
+    <body id="id_body">
+
+        <!-- Eductional basic information -->
+        <p class="subject">
+            Universidad Centroamericana "José Simeón Cañas".<br>
+            Programación de dispositivos móviles.<br>
+            Ciclo 01/19.
+        </p>
+
+        <!-- Front image -->
+        <header id="front-img" style="background-image: url('../assets/images/main/laboratorio7.jpg');">
+            <div class="blackManta">
+                <!-- Float menu implementation -->
+                <div class="float-menu">
+                    <div class="menu-content">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <nav class="menu-side">
+                        <div></div>
+                        <ul>
+                            <li><a href="#intro">Introducción ROOM.</a><i class="fas fa-code"></i></li>
+                            <li><a href="#room-database">RoomDatabase</a><i class="fas fa-heart"></i></li>
+                            <li><a href="#room-repository">Repository</a><i class="fas fa-scroll"></i></li>
+                            <li><a href="#room-viewmodel">ViewModel</a><i class="fas fa-sign-out-alt"></i></li>
+                            <li><a href="#room-livedata">LiveData</a><i class="fas fa-code"></i></li>
+                            <li><a href="#example">Ejemplo Práctico.</a><i class="fas fa-dumbbell"></i></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="main-front">
+                    <h1>Laboratorio 07.</h1>
+                    <h3>Viernes, 17 de mayo de 2019.</h3>
+                    <div class="grid-div two-columns frontList">
+                        <!-- Two-columns item -->
+                        <div class="article-body">
+
+                            <h4>Temario:</h4>
+                            <ul>
+                                <li>
+                                    Conceptualización básica acerca del componentes de arquitectura View Model, LiveData y ROOM, y explicación acerca de la filosofía que los rige.
+                                </li>
+
+                                <li>
+                                    Uso de View Model para la persistencia de datos ante el cambio en el ciclo de vida de los distintos componentes de Android.
+                                </li>
+
+                                <li>
+                                    Control y observación de cambios en los datos a través de LiveData.
+                                </li>
+
+                                <li>
+                                    Manejo y mantenimiento de bases de datos SQLite a través de ROOM.
+                                </li>
+                                <li>
+                                    Uso de co-rutinas de Kotlin, para realizar tareas asincronas de mantenimiento de la base de datos.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="article-body">
+                            <h4>Objetivos:</h4>
+                            <ul>
+                                <li>
+                                    Comprenda la filosofía de diseño que implementan los componentes de arquitectura de Android Jetpack vistos en el laboratorio.
+                                </li>
+
+                                <li>
+                                    Implementar el componente View Model y manipular sus características orientadas a la persistencia de datos.
+                                </li>
+
+                                <li>
+                                    Implementar el componente LiveData y manipular sus características orientadas a la observación y control de cambios en los datos.
+                                </li>
+
+                                <li>
+                                    Implementar el componente Room y manipular sus características orientadas al manejo de bases de datos SQLite.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down" id="down-button"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <article class="content">
+            <!-- Main title -->
+            <header class="title-content" id="title-content">
+                <div id="brand">
+                    <h1>Librería de persistencia ROOM.</h1>
+                    <div id="content-brand">
+                        <h5>Persistencia, unificación y reacción de datos.</h5>
+                    </div>
+                </div>
+            </header>
+
+            <section id="intro">
+                <h3>Introducción a la librería.</h3>
+                
+                <figure>
+                    <img style="width: 50em" src="../assets/images/laboratorio7/AndroidArch.png" alt="Inserte RIPIO aqui">
+                </figure>
+
+                <p>
+                    La librería de persistencia Room provee una capa de abstracción sobre SQLite; esto permite un acceso más robusto y de fácil implementación a la base de datos, mientras se aprovecha todo el poder de SQLite.
+                </p>
+                    Este diseño crea una experiencia del usuario consistente y agradable. Independientemente de que el usuario regrese a la app varios minutos después de cerrarla por última vez o varios días más tarde, verá al instante la información de la app que persiste a nivel local.
+
+                <p>
+                    Room reduce drásticamente la cantidad de código implementado, ya que este es generado, internamente en tiempo de compilación por medio del uso de las anotaciones. Este ORM tiene definido los estándares tanto de sintaxis como de semántica para, conexiones, querys, etc.
+                </p>
+
+                <p>
+                    Posee una estructura de capas jerárquica, por lo que cada componente solo depende del componente que está un nivel más abajo. Por ejemplo, las actividades y los fragmentos sólo dependen de un ViewModel, y estos a su vez de los repositorios.
+                </p>            
+            </section>
+
+            <section id = "components">
+                
+                <h3>Componentes de <a href="https://developer.android.com/topic/libraries/architecture/room">Room Persistence Library</a></h3> 
+                
+                <i><u><h4 id="room-database">RoomDatabase</h4></u></i>
+
+                <figure>
+                    <img style='width: 30em' src='../assets/images/laboratorio7/RoomDatabase.png' alt='Inserte RIPIO aqui'>
+                </figure>
+
+                <p>
+                    Encargada de controlar tanto la conexión, consultas y mantenimiento de la base de datos; se compone de tres principales componetes:
+                </p>
+
+                <h4>Entity</h4>
+
+                <p>
+                    Clase anotada que representa y mapea una tabla/entidad de la base de datos.
+                </p>
+                
+                <h5>Ejemplo de implementación</h5>
+
+                <pre class = 'kotlin'>
+                    <code>
+        @Entity (tableName = "word_table")
+        data class Word(
+            @PrimaryKey @ColumnInfo(name = "word") val word: String
+        )
+                                    
+                    </code>
+                </pre>
+
+                <h4>DAO (Data Access Object)</h4>
+
+                <p>
+                    Interfaz anotada que representa y mapea las consultas SQL a funciones nativas.
+                </p>
+
+                <h5>Ejemplo de implementación</h5>
+
+                <pre class = 'kotlin'>
+                    <code>
+        @Dao
+        interface WordDao {
+        
+            @Query("SELECT * from word_table ORDER BY word ASC")
+            fun getAllWords(): LiveData&lt;List&lt;Word&gt;&gt;        
+            @Insert
+            suspend fun insert(word: Word)
+        
+            @Query("DELETE FROM word_table")
+            fun deleteAll()
+        }
+                    </code>
+                </pre>
+
+                <h4>RoomDatabase</h4>
+
+                <p>
+                    Capa de la base de datos en la parte superior de la base de datos SQLite que se ocupa de las tareas que se manejan con un SQLiteOpenHelper. La base de datos Room utiliza el DAO para emitir consultas a la base de datos SQLite.
+                </p>
+
+                <ul>
+                    <p>
+                        Esta clase anotada con <code>@Database</code> debe cumplir las siguientes condiciones:  
+                    </p>
+
+                    <li>
+                            Ser una clase abstracta que herede de RoomDatabase.
+                    </li>
+                    <li>
+                            Incluir las entidades asociadas con la base de datos.
+                    </li>
+                    <li>
+                            Tener un método abstracto que no tenga argumentos y que devuelva la clase anotada con <code>@Dao</code>.
+                    </li>
+                </ul>
+
+                <h5>Ejemplo de implementación</h5>
+
+                <pre>
+                    <code class = 'kotlin'>
+        @Database(entities = [Word::class], version = 1 ,exportSchema = false)
+        abstract class WordRoomDatabase : RoomDatabase() {
+
+            abstract fun wordDao(): WordDao
+
+            companion object {
+                @Volatile
+                private var INSTANCE: WordRoomDatabase? = null
+
+                fun getDatabase(context: Context): WordRoomDatabase {
+                    val tempInstance = INSTANCE
+                    if (tempInstance != null) {
+                        return tempInstance
+                    }
+                    synchronized(this) {
+                        val instance = Room.databaseBuilder(
+                            context.applicationContext,
+                            WordRoomDatabase::class.java,
+                            "Word_database"
+                        ).build()
+                        INSTANCE = instance
+                        return instance
+                    }
+                }
+            }
+        }
+                    </code>
+                </pre>
+
+                <i><u><h4 id="room-repository">Repository</h4></u></i>
+
+                <figure>
+                    <img style='width: 30em' src='../assets/images/laboratorio7/Repository.png' alt='Inserte RIPIO aqui'>
+                </figure>
+
+                <p>
+                        Clase que se encarga de administrar múltiples fuentes de datos, ya sean web services, documentos, otras bases de datos, etc., con el fin de tener un solo punto de acceso a los datos.
+                </p>
+
+                <p>
+                        Es la única clase que depende de varias: El repositorio depende de un modelo de datos persistente y de una fuente de datos de backend remota.
+                </p>
+
+                <p>
+                        Toda la lógica de decidir de donde se obtendrá la información es manejada aquí.
+                </p>
+
+                <p>
+                        Si los datos están inactivos, el módulo de repositorio comienza a actualizar los datos en segundo plano.
+                </p>
+
+                <h5>Ejemplo de implementación</h5>
+
+                <pre>
+                    <code class = 'kotlin'>
+        class WordRepository(private val wordDao: WordDao) {
+
+            val allWords: LiveData&lt;List&lt;Word&gt;&gt;  = wordDao.getAllWords()
+        
+            @WorkerThread
+            suspend fun insert(word: Word) {
+                wordDao.insert(word)
+            }
+        }
+                    </code>
+                </pre>
+
+                <i><u><h4 id="room-viewmodel">ViewModel</h4></u></i>
+
+                <figure>
+                    <img style='width: 40em' src='../assets/images/laboratorio7/ViewModel.png' alt='Inserte RIPIO aqui'>
+                </figure>
+
+                <p>
+                        Se encarga de proporcionar data a la UI. Esta clase trabaja fuera de cualquier ciclo de vida, por lo que permite que los datos que contiene sobrevivan a cambios de configuración en la ejecución. 
+                </p>
+
+                <p>
+                    En el caso particular de Room, recive uno o varios repositorios de los cuales obtendrá los datos que manejará en la ejecución de la aplicación
+                </p>
+
+                <p>
+                        Actúa como mediador entre el Repositorio y la UI. Además permite comunicar información entre fragmentos y actividades de forma mas sencilla.
+                </p>
+
+                <h5>Ejemplo de implementación</h5>
+
+                <pre>
+                    <code class = 'kotlin'>
+        class WordViewModel(application: Application) : AndroidViewModel(application) {
+
+            private val repository: WordRepository
+            val allWords: LiveData&lt;List&lt;Word&gt;&gt; 
+        
+            init {
+                val wordsDao = WordRoomDatabase.getDatabase(application).wordDao()
+                repository = WordRepository(wordsDao)
+                allWords = repository.allWords
+            }
+        
+            fun insert(word: Word) = viewModelScope.launch(Dispatchers.IO) {
+                repository.insert(word)
+            }
+        }
+                    </code>
+                </pre>
+
+                <i><u><h4 id="room-livedata">LiveData</h4></u></i>
+
+                <p>
+                        Clase que permite que toda instancia de la misma pueda ser <em>observada</em>. Esto implica que siempre contiene la última versión de la data, notifica cuando ocurre un cambio en esta y está atenta al ciclo de vida: Los componentes de la UI solo observan la data relevante y nunca dejan de estar atentos a cualquier cambio.
+                </p>
+
+                <figure>
+                    <img style='width: 30em' src='../assets/images/laboratorio7/LiveData.jpeg' alt='Inserte RIPIO aqui'>
+                </figure>
+
+                <div class="tip">
+                    <h3>Patrón de Diseño Observer</h3>
+
+                    <p>
+                            LiveData utiliza este patrón para notificar cambios en la UI. 
+                    </p>
+
+                    <figure>
+                        <img style='width: 40em' src='../assets/images/laboratorio7/Observer.png' alt='Inserte RIPIO aqui'>
+                    </figure>
+
+                    <p>
+                            El patrón observador se da cuando un objeto llamado subject(sujeto) tiene una lista de objetos asociados llamados observers(observadores). Cuando el estado del sujeto cambia, este notifica a todos los observadores.
+                    </p>
+                </div>
+                <br><br>
+                <div class="tip">
+                    <h3>Co-rutinas Kotlin</h3>
+
+                    <p>
+                        El uso de las co-rutinas de kotlin, en la implementación de una arquitectura Room es vital para realizar trabajos en segundo plano, y asegurar la fluidez de la UI en la aplicación. Por ello se recomienda la lectura del siguiente artículo acerca de las mismas, donde se ahonda en el tema y se dan detalles importantes para la comprensión de estas.
+                    </p>
+
+                    <p>
+                        Link de lectura: <a href="https://devexperto.com/corrutinas/">DevExperto</a>
+                    </p>
+
+                    <div style="display:flex; align-items: center; justify-content: center">
+                        <iframe width="100%" height="400em" src="https://www.youtube.com/embed/BOHK_w09pVA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                </div>
+
+            </section>
+            
+        </article>
+
+        <!-- Footer Implementation -->
+        <footer>
+            <article>
+                <p><em>
+                        “YOU SHOULD'VE GONE FOR THE HEAD”
+                    </em></p>
+
+                <p id="author">
+                    Thanos.
+                </p>
+            </article>
+        </footer>
+
+        <!-- Home Button -->
+        <span id="HomeBtn"><i class="fas fa-chevron-up"></i></span>
+    </body>
+
+    <!-- JS scripts area -->
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="../assets/js/javaScript.js"></script>
+    <script src="../assets/js/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        sideMenuControl();
+        homeBtnControl();
+    </script>
+
+</html>
