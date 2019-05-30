@@ -270,7 +270,7 @@
                         </pre>
 
                         <p>
-                            El primer <i>wrapper</i> a implementar es <code>Response&lt;T&gt;</code>; dicha clase permite manejar el flujo de la respuesta, el estatus de respuesta, así como el acceso a sus atributos donde figuran el <i>body</i>, <i>header</i>, entre otros.
+                            El primer <i>wrapper</i> a implementar es <code>Response&lt;T&gt;</code>; dicha clase permite manejar el flujo de la respuesta, el estatus de respuesta, así como el acceso a sus atributos donde figuran el <i>body</i>, <i>header</i>, entre otros. Este permite que a partir de un proceso asíncrono, se pueda acceder y tomar decisiones a partir si la respuesta fue exitosa, o fallo y lanzó un excepción.
                         </p>
 
                         <p style='padding-left:1.5em;'>
@@ -278,7 +278,7 @@
                         </p>
 
                         <p>
-                            El último <em>wrapper</em> a implementar es Deferred&lt;T&gt;; esta clase auxilia al momento del uso y manejo de courrutinas en Kotlin. Este permite que a partir de un proceso asíncrono, se pueda acceder y tomar decisiones a partir si este se completo de manera exitosa, o fallo y lanzó un excepción. Esta clase posee mas implentaciones y usos, por lo que se recominenda la lectura de la documentación.
+                            El último <em>wrapper</em> a implementar es Deferred&lt;T&gt;; esta clase auxilia la funcionalidad al momento del uso y manejo de courrutinas en Kotlin. Principalmente se hará uso de esta para poder esperar a que se ejecutan procesos de manera asincrona, aunque esta clase posee mas implentaciones y usos, por lo que se recominenda la lectura de la documentación.
                         </p>
 
                         <p style='padding-left:1.5em;'>
@@ -333,6 +333,52 @@
                         </p>
                 </section>
 
+                <section id="room-integration">
+                    <h3>
+                        Integración con librería de persistencia ROOM.
+                    </h3>
+
+                    <p><u>Entity.</u></p>
+
+                    <p>
+                        En primer lugar se debe mencionar loa cambios menores que sufre la clase que representa la entidad dentro de la base de datos. Notar que cada campo esta siendo anotado por @field:Json; está anotación determina el nombre del atributo que representa ese campo en la representación Json de ese objeto. Esto auxilia al conversor <i>Mushi</i> a realizar el parseo y mapeo de la clase.
+                    </p>
+
+                    <h4>database/entities/GitHubRepo.kt</h4>
+
+                    <pre>
+                        <code class = 'kotlin'>
+    @Entity(tableName = "repos")
+    data class GitHubRepo(
+
+        @PrimaryKey
+        @field:Json(name="id")
+        val id: Long,
+
+        @field:Json(name="name")
+        val name: String,
+
+        @field:Json(name="full_name")
+        @ColumnInfo(name="full_name")
+        val fullName:String
+
+    )    
+                        </code>
+                    </pre>
+
+                    <p><u>Repositorio.</u></p>
+
+                    <p>
+
+                    </p>
+
+                    <p><u>ViewModel.</u></p>
+
+                    <p>
+
+                    </p>
+                </section>
+
             </section>
             
         </article>
@@ -341,11 +387,11 @@
         <footer>
             <article>
                 <p><em>
-                        “YOU SHOULD'VE GONE FOR THE HEAD”
+                        “I went for the head”
                     </em></p>
 
                 <p id="author">
-                    Thanos.
+                    Thor.
                 </p>
             </article>
         </footer>
