@@ -369,8 +369,10 @@
                     <p><u>Repositorio.</u></p>
 
                     <p>
-
+                        Dentro del repositorio solo debe de difinirse una función extra, la cual debe de obtener la instancia del servicio y delegar el método a la capa superior (ViewModel). Esto debido a fines didactidos, ya que facilmente puede implementarse en esta capa la lógica de obtención de los datos.
                     </p>
+
+                    <h4>database/repositories/GitHubRepoRepository.kt</h4>
 
                     <pre>
                         <code class = 'kotlin'>
@@ -388,8 +390,23 @@
                     <p><u>ViewModel.</u></p>
 
                     <p>
-
+                        Dentro del repositorio debe de definirse el método donde se implementa la lógica de obtención de datos; como la necesidad del método reside en que la tabla de Repositorios solo tenga la información obtenida de un usuario ingresado, el método debe de considerar los siguientes rubros:
                     </p>
+
+                    <ul>
+                        <li>
+                            Cada vez que se ejecute el método, debe de borrarse la tabla de repositorios.
+                        </li>
+                        <li>
+                            Debe de obtener los repositorios del usuario si existe, caso contrario muestre un mensaje de error.
+                        </li>
+                    </ul>
+
+                    <p>
+                        El siguiente código muestra la implementación del método; se han incluido comentarios donde se explica que hace cada llamada, proceso o decisión tomada.
+                    </p>
+
+                    <h4>database/viewmodels/GitHubRepoViewModel.kt</h4>
 
                     <pre>
                         <code class = 'kotlin'>
