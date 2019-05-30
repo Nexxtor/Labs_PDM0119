@@ -20,6 +20,10 @@ body{
     padding: 0;
 }
 
+#brand *{
+    text-align: center;
+}
+
 p{
     text-align: justify;
 }

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <!-- Stylesheets references -->
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/highlight_styles/androidstudio.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+            integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <link rel="icon" href="../assets/images/icons/android.png">
+
+        <title>Laboratorio 8</title>
+    </head>
+
+    <body id="id_body">
+
+        <!-- Eductional basic information -->
+        <p class="subject">
+            Universidad Centroamericana "José Simeón Cañas".<br>
+            Programación de dispositivos móviles.<br>
+            Ciclo 01/19.
+        </p>
+
+        <!-- Front image -->
+        <header id="front-img" style="background-image: url('../assets/images/main/laboratorio7.jpg');">
+            <div class="blackManta">
+                <!-- Float menu implementation -->
+                <div class="float-menu">
+                    <div class="menu-content">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                    <nav class="menu-side">
+                        <div></div>
+                        <ul>
+                            <li><a href="#intro">Introducción ROOM.</a><i class="fas fa-code"></i></li>
+                            <li><a href="#room-database">RoomDatabase</a><i class="fas fa-heart"></i></li>
+                            <li><a href="#room-repository">Repository</a><i class="fas fa-scroll"></i></li>
+                            <li><a href="#room-viewmodel">ViewModel</a><i class="fas fa-sign-out-alt"></i></li>
+                            <li><a href="#room-livedata">LiveData</a><i class="fas fa-code"></i></li>
+                            <li><a href="#example">Ejemplo Práctico.</a><i class="fas fa-dumbbell"></i></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="main-front">
+                    <h1>Laboratorio 08.</h1>
+                    <h3>Viernes, 31 de mayo de 2019.</h3>
+                    <div class="grid-div two-columns frontList">
+                        <!-- Two-columns item -->
+                        <div class="article-body">
+
+                            <h4>Temario:</h4>
+                            <ul>
+                                <li>
+                                    Conceptualización básica acerca del componentes de arquitectura View Model, LiveData y ROOM, y explicación acerca de la filosofía que los rige.
+                                </li>
+
+                                <li>
+                                    Uso de View Model para la persistencia de datos ante el cambio en el ciclo de vida de los distintos componentes de Android.
+                                </li>
+
+                                <li>
+                                    Control y observación de cambios en los datos a través de LiveData.
+                                </li>
+
+                                <li>
+                                    Manejo y mantenimiento de bases de datos SQLite a través de ROOM.
+                                </li>
+                                <li>
+                                    Uso de co-rutinas de Kotlin, para realizar tareas asincronas de mantenimiento de la base de datos.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="article-body">
+                            <h4>Objetivos:</h4>
+                            <ul>
+                                <li>
+                                    Comprenda la filosofía de diseño que implementan los componentes de arquitectura de Android Jetpack vistos en el laboratorio.
+                                </li>
+
+                                <li>
+                                    Implementar el componente View Model y manipular sus características orientadas a la persistencia de datos.
+                                </li>
+
+                                <li>
+                                    Implementar el componente LiveData y manipular sus características orientadas a la observación y control de cambios en los datos.
+                                </li>
+
+                                <li>
+                                    Implementar el componente Room y manipular sus características orientadas al manejo de bases de datos SQLite.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down" id="down-button"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <article class="content">
+            <!-- Main title -->
+            <header class="title-content" id="title-content">
+                <div id="brand">
+                    <h1>Retrofit con Room.</h1>
+                    <div id="content-brand">
+                        <h5>Consumo de web services a través de la librería Retrofit.</h5>
+                    </div>
+                </div>
+            </header>
+
+            <section id="intro">
+                <h3>Introducción a la librería.</h3>
+                
+                <p>
+                    <u>API Rest:</u> Es cualquier interfaz o servicio entre sistemas que use HTTP para obtener datos o generar operaciones sobre esos datos en todos los formatos posibles, manteniendo un estándar en la comunicación; por ejemplo JSON o XML.
+                </p>
+                
+                <figure>
+                    <img style="width: 30em" src="../assets/images/laboratorio8/apiRest.png" alt="Inserte RIPIO aqui">
+                </figure>
+
+                <p>
+                    Retrofit es un cliente REST para Android y Java, desarrollado por Square. Este facilita la realización de peticiones GET, POST, PUT, PATCH, DELETE y HEAD a web services, especificamente API REST; así como de descargar datos en formato JSON o XML de manera sencilla.
+                </p>
+
+                <p>
+                    Para su implementación se hará uso de corrutinas de Kotlin, con el fin de obtener dichos resultados de forma asíncrona, sin sacrificar el rendimiento de la aplicación en cuestión.
+                </p>
+
+                <p>
+                    Retrofit trabaja a través de servicios de consultas, que mapean las peticiones al Web service. Estos servicios son adaptados a código por medio de interfaces, y dicho mapeo se logra a través del uso de anotaciones específicas por cada método (Esto dependerá del fin que tenga la ruta). Ejemplo de implementación:
+                </p>            
+
+                <pre>
+                    <code class = 'kotlin'>
+    interface EjemploService{
+
+        @Anotancion
+        fun metodo1(Params):Deferred&lt;Response&lt;Void&gt;&gt;
+
+        @Anotancion
+        fun metodo2(Params):Deferred&lt;Response&lt;Void&gt;&gt;
+
+        @Anotancion
+        fun metodo3(Params):Deferred&lt;Response&lt;Void&gt;&gt;
+    }
+                    </code>
+                </pre>
+
+                <p>
+                    Cabe mencionar que es la aplicación la que se adapta al Web service y no al revés, ya que puede generar confusiones en el diseño y desarrollo, si se altera este orden.
+                </p>
+            </section>
+
+            <section id="implementation">
+                <h3>
+                    Implementación de Retofit.
+                </h3>
+
+                <p>
+                    Como primer paso en el uso de Retifit es la importación de la librería; a su vez se importará un gestor de conversiones de Json a objeto, esto con el fin de mapear las respuestas directamente a instacias que puedan ser interpretadas en la aplicación.
+                </p>
+
+                <p>
+                    Actualmente la versión de Retrofit más actual es la 2.5.0; como gestor de conversiones se hará uso de Mushi en su versión 1.8.0. Por lo que dentro del gradle.build se agregan las siguientes dependencias.
+                </p>
+
+                <pre>
+                    <code class = 'kotlin'>
+    /*Mushi*/
+    implementation "com.squareup.moshi:moshi-kotlin:1.8.0"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:1.8.0"
+
+    /*Retrofit dependencies*/
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+                    </code>
+                </pre>
+
+                <p>
+                    Para fines didácticos se hará uso del código realizado en el laboratorio anterior, con algunos cambios sutilies. En esta sesión se implementará un sistema que, al ingresar un usuario de Github, se agreguen automaticamente sus repositorios; se hará uso de la GithubApi como webService para obtener los datos. El código base se encuentra en <a href="">MVVMRetrofit</a>
+                </p>
+
+                <section id="service">
+                    <h3>Implementación del servicio.</h3>
+
+                    <p>
+                        Con el fin de mantener la segmentación por paquetes, lo primero será añadir al proyecto un paquete <i>service</i>, que su vez contendrá otro paquete <i>retrofit</i>. Dentro de este útlimo se creará una interfaz, la cual contendrá la definición de los métodos a utilizar en la aplicación, que estén relacionados al consumo de algún WebService.
+                    </p>
+
+                    <h4><i>services/retrofit/GithubService.kt</i></h4>
+
+                    <pre>
+                        <code class = 'kotlin'>
+    interface GithubService{
+
+        /*
+        *
+        * Código a implementar
+        *
+        */
+
+    }
+                        </code>
+                    </pre>
+
+                    <p>
+                        En primer lugar se manejara una URI de la API base, por lo que lo conveniente es extraer este recurso como constante, en caso cambie sea mas sencillo realizar los cambios pertinentes.
+                    </p>
+
+                    <p>
+                        La lógica de la aplicación indica que, solo se requiere un método que recupere todos los repositorios por usuario; esto conrresponde a la ruta <i>https://api.github.com/users/{user}/repos</i>, donde {user} es el usuario ingresado por la aplicación para realizar la busqueda.
+                    </p>
+
+                    <p>
+                        Por el momento se implementará sin aplicar las anotaciones, con el fin de ir observando el cambio que va sufriendo el método con la aplicaión de los diversos patrones involucrados en la implementación de la librería. 
+                    </p>
+
+                    <pre>
+                        <code class = 'kotlin'>
+    const val GITHUB_API_BASE_URI = "https://api.github.com/"
+
+    interface GithubService{
+
+        fun getRepos(user:String):List&lt;GithubRepo&gt;
+
+    }  
+                        </code>
+                    </pre>
+
+                    <p>
+                        A continuación se hará uso de la anotación <code>@GET</code>, la cual permite mapear el método anotado, a una petición de tipo <i>GET</i>. Esta recibe por parámetro la dirección a la cual se hará la petición; esta debe de ser una dirección relativa, tomada desde el final de la URI base.
+                    </p>
+
+                    <pre>
+                        <code class = 'kotlin'>
+    const val GITHUB_API_BASE_URI = "https://api.github.com/"
+
+    interface GithubService{
+
+        @GET("/users/{user}/repos")
+        fun getRepos(user:String):List&lt;GithubRepo&gt;
+
+    }  
+                        </code>
+                    </pre>
+
+                    <p>
+                        Como es de notar dentro de la ruta existe un campo utilizado como parámetro; este corresponde al mismo que se recibe por medio del método. Para indicar al compilador que ese parámetro corresponde al campo "{user}" de la ruta, se hace uso de la anotación @Path, e indicando como atributo la propiedad a la que se hace referencia.
+                    </p>
+
+                    <pre>
+                            <code class = 'kotlin'>
+        const val GITHUB_API_BASE_URI = "https://api.github.com/"
+    
+        interface GithubService{
+    
+            @GET("/users/{user}/repos")
+            fun getRepos(@Path("user") user:String):List&lt;GithubRepo&gt;
+    
+        }  
+                            </code>
+                        </pre>
+
+                        <p>
+                            El primer <i>wrapper</i> a implementar es <code>Response&lt;T&gt;</code>; dicha clase permite manejar el flujo de la respuesta, el estatus de respuesta, así como el acceso a sus atributos donde figuran el <i>body</i>, <i>header</i>, entre otros.
+                        </p>
+
+                        <p style='padding-left:1.5em;'>
+                            Referencia a Square: <a href='https://square.github.io/retrofit/2.x/retrofit/retrofit2/Response.html'>Class Response&lt;T&gt;</a>
+                        </p>
+
+                        <p>
+                            El último <em>wrapper</em> a implementar es Deferred&lt;T&gt;; esta clase auxilia al momento del uso y manejo de courrutinas en Kotlin. Este permite que a partir de un proceso asíncrono, se pueda acceder y tomar decisiones a partir si este se completo de manera exitosa, o fallo y lanzó un excepción. Esta clase posee mas implentaciones y usos, por lo que se recominenda la lectura de la documentación.
+                        </p>
+
+                        <p style='padding-left:1.5em;'>
+                            Referencia a kotlinx.coroutines: <a href='https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-deferred/'>Deferred</a>
+                        </p>
+
+                        <pre>
+                            <code class = 'kotlin'>
+    const val GITHUB_API_BASE_URI = "https://api.github.com/"
+
+    interface GithubService{
+
+        @GET("/users/{user}/repos")
+        fun getRepos(@Path("user") user:String):Deferred&lt;Response&lt;List&lt;GithubRepo&gt;&gt;&gt;
+
+    }  
+                            </code>
+                        </pre>
+
+                        <p>
+                            Una vez implementadas las funciones a utilizar, se debe de generar la instancia que implemente la interfaz. Para ello se hará uso del Builder de la clase Retrofit, la cual además de preparar todos los ámbitos referentes a una petición, genera la implementación de los métodos declarados previamente. Es en este punto donde las rutas específicas se enlazan a la URL base.
+                        </p>
+
+                        <p>
+                            También son especificados tanto el gestor de conversiones, como el gestor de las corrutinas en Kotlin. Cabe resaltar el builder de Retrofit, permite personalizar los tipo de peticiones por cada servicio que se implemente; por lo que no se limita a un solo tipo de petición en la ejecución de la aplicación.
+                        </p>
+
+                        <pre>
+                            <code class = 'kotlin'>
+    const val GITHUB_API_BASE_URI = "https://api.github.com/"
+
+    interface GithubService{
+
+        @GET("/users/{user}/repos")
+        fun getRepos(@Path("user") user:String):Deferred&lt;Response&lt;List&lt;GithubRepo&gt;&gt;&gt;
+
+        companion object{
+            fun getRetrofit():GithubService = Retrofit.Builder()
+                .baseUrl(GITHUB_API_BASE_URI)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .build()
+                .create(GitHubService::class.java)
+        }
+
+    }  
+                            </code>
+                        </pre>
+
+                        <p>
+                            A partir de esta interfaz, se realizarán las peticiones a la API. A continuación se implementará la librería REST Retrofit con la librería de persistencia Room.
+                        </p>
+                </section>
+
+            </section>
+            
+        </article>
+
+        <!-- Footer Implementation -->
+        <footer>
+            <article>
+                <p><em>
+                        “YOU SHOULD'VE GONE FOR THE HEAD”
+                    </em></p>
+
+                <p id="author">
+                    Thanos.
+                </p>
+            </article>
+        </footer>
+
+        <!-- Home Button -->
+        <span id="HomeBtn"><i class="fas fa-chevron-up"></i></span>
+    </body>
+
+    <!-- JS scripts area -->
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="../assets/js/javaScript.js"></script>
+    <script src="../assets/js/highlight.pack.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        sideMenuControl();
+        homeBtnControl();
+    </script>
+
+</html>

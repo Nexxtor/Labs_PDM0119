@@ -36,5 +36,22 @@
 			"\t</code>",
 			"</pre>"
 		]
+	},
+
+	"Less than and greater than":{
+		"scope": "html",
+		"prefix": "lessGreater",
+		"body": "&lt;$1&gt;"
+	},
+
+	"Enlace de referencia":{
+		"scope": "html",
+		"prefix": "reference",
+		"body": [	
+			"<p style='padding-left:1.5em;'>",
+			"\tReferencia a ${1:SitioWeb}: <a href='${2:Url}'>${3:Titulo_de_articulo}</a>",
+			"</p>"
+
+		]
 	}
 }
