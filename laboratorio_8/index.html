@@ -28,7 +28,7 @@
         </p>
 
         <!-- Front image -->
-        <header id="front-img" style="background-image: url('../assets/images/main/laboratorio7.jpg');">
+        <header id="front-img" style="background-image: url('../assets/images/main/laboratorio8.jpg');">
             <div class="blackManta">
                 <!-- Float menu implementation -->
                 <div class="float-menu">
@@ -38,12 +38,9 @@
                     <nav class="menu-side">
                         <div></div>
                         <ul>
-                            <li><a href="#intro">Introducción ROOM.</a><i class="fas fa-code"></i></li>
-                            <li><a href="#room-database">RoomDatabase</a><i class="fas fa-heart"></i></li>
-                            <li><a href="#room-repository">Repository</a><i class="fas fa-scroll"></i></li>
-                            <li><a href="#room-viewmodel">ViewModel</a><i class="fas fa-sign-out-alt"></i></li>
-                            <li><a href="#room-livedata">LiveData</a><i class="fas fa-code"></i></li>
-                            <li><a href="#example">Ejemplo Práctico.</a><i class="fas fa-dumbbell"></i></li>
+                            <li><a href="#intro">Introducción Retrofit.</a><i class="fas fa-code"></i></li>
+                            <li><a href="#service">Servicio Retrofit</a><i class="fas fa-heart"></i></li>
+                            <li><a href="#room-integration">Imtegración con Room</a><i class="fas fa-scroll"></i></li>
                         </ul>
                     </nav>
                 </div>
@@ -57,22 +54,19 @@
                             <h4>Temario:</h4>
                             <ul>
                                 <li>
-                                    Conceptualización básica acerca del componentes de arquitectura View Model, LiveData y ROOM, y explicación acerca de la filosofía que los rige.
+                                    Recapitulación de la definición y aplicación de WebServices, mas especificamente de las RESTFul API's
+                                </li>
+                                
+                                <li>
+                                    Introdución al consumo de REST API's a haciendo uso de la librería Retrofit.
+                                </li>
+                                
+                                <li>
+                                    Implementación de métodos de consumo y peticiones, a partir de uso de anotaciones específicas definidas por Retrofit
                                 </li>
 
                                 <li>
-                                    Uso de View Model para la persistencia de datos ante el cambio en el ciclo de vida de los distintos componentes de Android.
-                                </li>
-
-                                <li>
-                                    Control y observación de cambios en los datos a través de LiveData.
-                                </li>
-
-                                <li>
-                                    Manejo y mantenimiento de bases de datos SQLite a través de ROOM.
-                                </li>
-                                <li>
-                                    Uso de co-rutinas de Kotlin, para realizar tareas asincronas de mantenimiento de la base de datos.
+                                    Implementación de dichos métodos, integrandolo con la librería de persistencia Room y toda su arquitectura.
                                 </li>
                             </ul>
                         </div>
@@ -80,20 +74,11 @@
                             <h4>Objetivos:</h4>
                             <ul>
                                 <li>
-                                    Comprenda la filosofía de diseño que implementan los componentes de arquitectura de Android Jetpack vistos en el laboratorio.
+                                    Comprender la filosofía y los patrones de diseños implementados por la librería de consumo Retrofit.
                                 </li>
-
                                 <li>
-                                    Implementar el componente View Model y manipular sus características orientadas a la persistencia de datos.
-                                </li>
-
-                                <li>
-                                    Implementar el componente LiveData y manipular sus características orientadas a la observación y control de cambios en los datos.
-                                </li>
-
-                                <li>
-                                    Implementar el componente Room y manipular sus características orientadas al manejo de bases de datos SQLite.
-                                </li>
+                                    Implementar los métodos de consumo anotados, entrelazandolos con la librería de persistencia Room, respetando la arquitectura y el patrón de diseño que esta implementa.
+                                </li>   
                             </ul>
                         </div>
                     </div>
@@ -185,7 +170,7 @@
                 </pre>
 
                 <p>
-                    Para fines didácticos se hará uso del código realizado en el laboratorio anterior, con algunos cambios sutilies. En esta sesión se implementará un sistema que, al ingresar un usuario de Github, se agreguen automaticamente sus repositorios; se hará uso de la GithubApi como webService para obtener los datos. El código base se encuentra en <a href="">MVVMRetrofit</a>
+                    Para fines didácticos se hará uso del código realizado en el laboratorio anterior, con algunos cambios sutilies. En esta sesión se implementará un sistema que, al ingresar un usuario de Github, se agreguen automaticamente sus repositorios; se hará uso de la GithubApi como webService para obtener los datos. El código base se encuentra en <a href="https://github.com/petrlr14/MVVRetrofit">MVVMRetrofit</a>
                 </p>
 
                 <section id="service">
